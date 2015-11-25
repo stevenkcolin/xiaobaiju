@@ -1,7 +1,7 @@
 /**
  * Created by Pengfei on 2015/11/9.
  * Logger util by wrapping log4js
- * The config is ../config/log4j.json
+ * The config is ../config/log4js.json
  * How to use:
  * var logger = require('./logger');
  * var logFile = logger.getLogger('log_file');
@@ -9,7 +9,7 @@
  */
 
 var logger = require('log4js');
-var logger_config = require('../config/log4j.json');
+var logger_config = require('../config/log4js.json');
 logger.configure(logger_config);
 
 module.exports = logger;

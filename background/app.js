@@ -8,6 +8,7 @@ var favicon = require("static-favicon");
 var errorHandler = require("./js/common/errorHandler");
 var constant = require("./js/common/constant");
 var user = require("./js/routes/user");
+var task = require("./js/routes/task");
 require("./js/common/dbUtils");
 
 var app = express();
@@ -25,10 +26,14 @@ app.use(require("express-domain-middleware"));
 // user routers for "/user" url
 app.use("/user", user);
 
+// user routers for "/task" url
+app.use("/task", task);
+
 //send response if success
 app.use(function(req, res) {
-    var result = {status: constant.RETURN_TYPE_SUCCESS, result: req.result};
-    res.status(constant.RESPONSE_STATUS_SUCCESS).json(result);
+    if (!req.isRouted) {
+        res.status(constant.RESPONSE_STATUS_NOT_FOUND).json({status: constant.RETURN_TYPE_ERROR});
+    }
 });
 
 // catch 404 and forward to error handler
