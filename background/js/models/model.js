@@ -21,6 +21,7 @@ var _User = new Schema({
 var _Task = new Schema({
     title : String,
     description : String,
+    dueDate: Date,
     createDate: Date,
     user: {type: Schema.Types.ObjectId, ref: "User"}
 });
