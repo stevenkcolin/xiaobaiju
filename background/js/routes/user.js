@@ -52,6 +52,14 @@ router.post("/loginByOther", function(req, res, next) {
 	});
 });
 
+// find user by parameter
+router.post("/find", function(req, res) {
+	User.find(req.body, function(err, doc) {
+		if (err) throw err;
+		successHandler.handle(doc, res);
+	});
+});
+
 // get a user by id
 router.get("/:id", function(req, res, next) {
 	var id = req.params.id;
