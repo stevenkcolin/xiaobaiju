@@ -25,9 +25,9 @@ router.post("/create", function(req, res, next) {
 	if (req.body.password) req.body.password = md5encrypt.encrypt(req.body.password);
 	_.extend(user, req.body);
 	user.createDate = new Date();
-	user.save(function(err){
+	user.save(function(err, doc){
 		if (err) throw err;
-		successHandler.handle(null, res);
+		successHandler.handle(doc, res);
 	});
 });
 
@@ -35,7 +35,10 @@ router.post("/create", function(req, res, next) {
 router.post("/login", function(req, res, next) {
 	var phone = req.body.phone;
 	var password = req.body.password;
-	password = md5encrypt.encrypt(password);
+	var encoded = req.body.encoded;
+	if (encoded !== true) {
+		password = md5encrypt.encrypt(password);
+	}
 	User.find({phone: phone, password: password}, function(err, doc) {
 		if (err) throw err;
 		successHandler.handle(doc, res);

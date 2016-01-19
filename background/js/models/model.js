@@ -23,6 +23,7 @@ var _Task = new Schema({
     description : String,
     dueDate: Date,
     createDate: Date,
+    completed: Boolean,
     user: {type: Schema.Types.ObjectId, ref: "User"}
 });
 
