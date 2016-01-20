@@ -10,12 +10,15 @@ var Schema = mongoose.Schema;
 
 // Define User schema
 var _User = new Schema({
-    phone : {type: String, unique: true},
+    phone : {type: String, unique: true, sparse: true},
     password : String,
     loginFrom: String, //3rd party {qq, weibo, weixin}
     loginAccount: String, //3rd party account
+    name: String,
     createDate: Date
 });
+
+_User.index({loginFrom: 1, loginAccount: 1}, {unique: true});
 
 // Define Task schema
 var _Task = new Schema({

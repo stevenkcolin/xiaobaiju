@@ -23,7 +23,7 @@ router.all("*", function(req, res, next) {
 router.post("/create", function(req, res) {
     var task = new Task();
     _.extend(task, req.body);
-    task.createDate = new Date();
+    //task.createDate = new Date();
     task.save(function(err){
         if (err) throw err;
         successHandler.handle(null, res);
@@ -38,7 +38,7 @@ router.post("/massCreate", function(req, res) {
     for (var i in arrTask) {
         var task = new Task();
         _.extend(task, arrTask[i]);
-        task.createDate = new Date();
+        //task.createDate = new Date();
         task.save(function (err, doc) {
             if (err) throw err;
             result.push(doc);
