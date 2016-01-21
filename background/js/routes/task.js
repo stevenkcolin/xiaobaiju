@@ -31,20 +31,36 @@ router.post("/create", function(req, res) {
 });
 
 //create multiple tasks
-router.post("/massCreate", function(req, res) {
+router.post("/massUpdate", function(req, res) {
     var arrTask = req.body;
     var result = [];
     var count = 0;
     for (var i in arrTask) {
         var task = new Task();
         _.extend(task, arrTask[i]);
-        //task.createDate = new Date();
-        task.save(function (err, doc) {
-            if (err) throw err;
-            result.push(doc);
-            count++;
-            if (count === arrTask.length) successHandler.handle(result, res);
-        });
+        if (!arrTask[i]._id) {
+            //task.createDate = new Date();
+            task.save(function (err, doc) {
+                if (err) throw err;
+                result.push(doc);
+                count++;
+                if (count === arrTask.length) successHandler.handle(result, res);
+            });
+        } else if (task.isDeleted) {
+            Task.findOneAndRemove({_id: task._id}, function(err, doc) {
+                if (err) throw err;
+                result.push(doc);
+                count++;
+                if (count === arrTask.length) successHandler.handle(result, res);
+            })
+        } else {
+            Task.findOneAndUpdate({_id: task.id}, {$set: task}, function(err, doc) {
+                if (err) throw err;
+                result.push(doc);
+                count++;
+                if (count === arrTask.length) successHandler.handle(result, res);
+            })
+        }
     }
 });
 
