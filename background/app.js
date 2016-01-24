@@ -9,6 +9,8 @@ var errorHandler = require("./js/common/errorHandler");
 var constant = require("./js/common/constant");
 var user = require("./js/routes/user");
 var task = require("./js/routes/task");
+var template = require("./js/routes/template");
+var actiontype = require("./js/routes/actiontype");
 require("./js/common/dbUtils");
 
 var app = express();
@@ -26,8 +28,14 @@ app.use(require("express-domain-middleware"));
 // user routers for "/user" url
 app.use("/user", user);
 
-// user routers for "/task" url
+// task routers for "/task" url
 app.use("/task", task);
+
+// template routers for "/template" url
+app.use("/template",template);
+
+// template routers for "/actiontype" url
+app.use("/actiontype",actiontype);
 
 //send response if success
 app.use(function(req, res) {

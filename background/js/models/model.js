@@ -30,6 +30,25 @@ var _Task = new Schema({
     user: {type: Schema.Types.ObjectId, ref: "User"}
 });
 
+// added by chenlin on 2015
+// Defin Template,Action,rel_Template_Action schema
+var _Template = new Schema ({
+    templateName : String,
+    ActionTypeList : Array,
+    CreatedDate : Date
+})
+
+var _ActionType = new Schema ({
+    ActionTypeName : String,
+    ActionPostLimit : String,
+    CreatedDate : Date
+})
+
+
+
 // export them
 exports.User = mongoose.model("User", _User, "USER");
 exports.Task = mongoose.model("Task", _Task, "TASK");
+
+exports.Template = mongoose.model("Template", _Template, "Template");
+exports.ActionType = mongoose.model("ActionType",_ActionType,"ActionType");
