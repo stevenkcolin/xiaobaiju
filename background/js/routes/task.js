@@ -54,7 +54,7 @@ router.post("/massUpdate", function(req, res) {
                 if (count === arrTask.length) successHandler.handle(result, res);
             })
         } else {
-            Task.findOneAndUpdate({_id: task.id}, {$set: task}, function(err, doc) {
+            Task.findOneAndUpdate({_id: arrTask[i]._id}, {$set: _.omit(arrTask[i], '_id')}, function(err, doc) {
                 if (err) throw err;
                 result.push(doc);
                 count++;
