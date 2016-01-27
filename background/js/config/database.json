@@ -1,7 +1,0 @@
-{
-  "database": "xiaobaiju",
-  "protocol": "mongodb",
-  "host": "127.0.0.1",
-  "username": "",
-  "password": ""
-}
