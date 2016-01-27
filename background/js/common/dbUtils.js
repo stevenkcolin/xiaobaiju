@@ -1,6 +1,6 @@
 var mongoose = require( 'mongoose' );
 
-var dbconfig = require('../config/database.json')
+var dbconfig = require('../config/nonsqlDB.json')
 // Build the connection string
 var dbURI = dbconfig.protocol + '://' + dbconfig.host + '/' + dbconfig.database;
 // Create the database connection

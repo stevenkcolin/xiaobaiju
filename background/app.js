@@ -4,6 +4,7 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var favicon = require("static-favicon");
+var orm = require("orm");
 
 var errorHandler = require("./js/common/errorHandler");
 var constant = require("./js/common/constant");
@@ -11,6 +12,8 @@ var user = require("./js/routes/user");
 var task = require("./js/routes/task");
 var template = require("./js/routes/template");
 var actiontype = require("./js/routes/actiontype");
+var reportInfo = require("./js/routes/reportInfo");
+var sqldbConfig = require("./js/config/sqlDB.json");
 require("./js/common/dbUtils");
 
 var app = express();
@@ -25,6 +28,15 @@ app.use(express.static(path.join(__dirname, "public")));
 //use domain middleware
 app.use(require("express-domain-middleware"));
 
+//db connection by using orm
+app.use(orm.express(sqldbConfig, {
+    define: function(db, models, next) {
+        var listModels = require("./js/models/sqlModel");
+        listModels(db, models);
+        next();
+    }
+}));
+
 // user routers for "/user" url
 app.use("/user", user);
 
@@ -36,6 +48,9 @@ app.use("/template",template);
 
 // template routers for "/actiontype" url
 app.use("/actiontype",actiontype);
+
+// template routers for "/reportInfo" url
+app.use("/reportInfo", reportInfo);
 
 //send response if success
 app.use(function(req, res) {
