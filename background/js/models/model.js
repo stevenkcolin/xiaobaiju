@@ -36,13 +36,13 @@ var _Template = new Schema ({
     templateName : String,
     ActionTypeList : Array,
     CreatedDate : Date
-})
+});
 
 var _ActionType = new Schema ({
     ActionTypeName : String,
     ActionPostLimit : String,
     CreatedDate : Date
-})
+});
 
 
 
@@ -50,5 +50,5 @@ var _ActionType = new Schema ({
 exports.User = mongoose.model("User", _User, "USER");
 exports.Task = mongoose.model("Task", _Task, "TASK");
 
-exports.Template = mongoose.model("Template", _Template, "Template");
-exports.ActionType = mongoose.model("ActionType",_ActionType,"ActionType");
+exports.Template = mongoose.model("Template", _Template, "TEMPLATE");
+exports.ActionType = mongoose.model("ActionType",_ActionType,"ACTIONTYPE");
