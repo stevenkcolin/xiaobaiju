@@ -101,17 +101,23 @@ router.post("/searchByCondition", function(req, res, next) {
 
 });
 
-// login by phone and password
+// admin login
 router.post("/login", function(req, res, next) {
-    var phone = req.body.phone;
-    var password = req.body.password;
-    var encoded = req.body.encoded;
-    if (encoded !== true) {
-        password = md5encrypt.encrypt(password);
-    }
-    User.find({phone: phone, password: password}, function(err, doc) {
+    var userid = req.body.userid;
+    var userpwd = req.body.userpwd;
+    //var encoded = req.body.encoded;
+    //if (encoded !== true) {
+    //    password = md5encrypt.encrypt(password);
+    //}
+    Admin.find({loginAccount: userid, password: userpwd}, function(err, doc) {
         if (err) throw err;
-        successHandler.handle(doc, res);
+        if (doc.length > 0) {
+            req.session.user = doc;
+            successHandler.handle(doc, res);
+        } else if (doc.length === 0) {
+            res.json({"status": "fail"})
+        }
+
     });
 });
 
@@ -127,10 +133,6 @@ router.post("/loginByOther", function(req, res, next) {
 
 router.get('/', function(req, res, next) {
 	res.send('respond with a resource');
-});
-
-router.get('/main', function(req, res) {
-    res.render('adminMain', { title: 'Hello, World!' });
 });
 
 router.get('/adminMgmt', function(req, res) {
