@@ -8,6 +8,8 @@ var orm = require("orm");
 
 var errorHandler = require("./js/common/errorHandler");
 var constant = require("./js/common/constant");
+var index = require('./js/routes/index');
+var admin = require("./js/routes/admin");
 var user = require("./js/routes/user");
 var task = require("./js/routes/task");
 var template = require("./js/routes/template");
@@ -17,6 +19,10 @@ var sqldbConfig = require("./js/config/sqlDB.json");
 require("./js/common/dbUtils");
 
 var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(favicon());
 app.use(logger("dev"));
@@ -29,13 +35,18 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("express-domain-middleware"));
 
 //db connection by using orm
-app.use(orm.express(sqldbConfig, {
-    define: function(db, models, next) {
-        var listModels = require("./js/models/sqlModel");
-        listModels(db, models);
-        next();
-    }
-}));
+//app.use(orm.express(sqldbConfig, {
+//    define: function(db, models, next) {
+//        var listModels = require("./js/models/sqlModel");
+//        listModels(db, models);
+//        next();
+//    }
+//}));
+// user routers for "/" url
+app.use("/", index);
+
+// user routers for "/admin" url
+app.use("/admin", admin);
 
 // user routers for "/user" url
 app.use("/user", user);
