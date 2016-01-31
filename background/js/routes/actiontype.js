@@ -9,7 +9,7 @@ var _ = require('underscore');
 
 var models = require("../models/model");
 var successHandler = require("../common/successHandler");
-var ActionType = models.ActionType;
+var ActionType = models.ACTIONTYPE;
 
 var router = express.Router();
 

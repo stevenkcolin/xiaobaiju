@@ -9,7 +9,7 @@ var _ = require('underscore');
 
 var models = require("../models/model");
 var successHandler = require("../common/successHandler");
-var Template = models.Template;
+var Template = models.TEMPLATE;
 
 var router = express.Router();
 
