@@ -1,5 +1,71 @@
-extends layout
+doctype html
+html
+    head(id="Head1")
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        title JadeT
+        link(rel="stylesheet" type="text/css" href="/stylesheets/themes/gray/easyui.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/default.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/themes/icon.css")
+        script(type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js')
+        script(type='text/javascript' src='/javascripts/jquery.easyui.min.js')
+        script(type='text/javascript' src='/javascripts/common.js')
+        script(type='text/javascript' src='/javascripts/outlook2.js')
+        script.
+            function clickMenu(obj) {
+                var tabTitle = $(obj).text();
+                var url = $(obj).attr("way");
+                addTab(tabTitle, url);
+                $('.easyui-accordion li div').removeClass("selected");
+                $(obj).parent().addClass("selected");
+            }
 
-block content
-  h1= title
-  p Welcome to #{title}
+            function mouseOverMenu(obj) {
+                $(obj).parent().addClass("hover");
+            }
+
+            function mouseOutMenu(obj) {
+                $(obj).parent().removeClass("hover");
+            }
+
+
+
+    body(class="easyui-layout" style="overflow-y: hidden"  scroll="no")
+        div(region="north" split="true" border="false" style="overflow: hidden; height: 80px;")
+            span(style="float:right; padding-right:0px;padding-top:10px;" class="head")
+                div(class="anniu" style="float: right;")
+                    a(class="styleswitch a1" style="CURSOR: pointer" title="默认" rel="default")
+                    a(class="styleswitch a2" style="CURSOR: pointer" title="黑色" rel="black")
+                    a(class="styleswitch a3" style="CURSOR: pointer" title="白色" rel="metro")
+                    a(class="styleswitch a4" style="CURSOR: pointer" title="黑灰色" rel="gray")
+                    div 欢迎: 用户
+                        a(href="#" id="editpass") 修改密码
+                        a(href="#" id="loginOut") 安全退出
+
+            span(style="padding-left:10px;")
+                img(src="../images/yum_logo_web.png" style="padding-top: 10px;")
+                span(style="font-size: 32px;") 原料溯源系统总部端后台管理平台
+        div(region="south" split="true" style="height: 30px; background: #f3f3f3;")
+            div(class="footer")
+        div(region="west" split="true" title="导航菜单" style="width:180px;" id="west")
+            div(class="easyui-accordion" fit="true" border="false")
+                div(title="系统管理" icon="icon-nav" style="overflow:auto;")
+                    ul
+                        li
+                            div
+                                a(way="/admin/adminMgmt" onclick="clickMenu(this)"
+                                onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") 管理员账号
+                        li
+                            div
+                                a(way="/admin/adminMgmt" onclick="clickMenu(this)"
+                                onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") 管理员账号2
+                div(title="数据管理" icon="icon-nav" style="overflow:auto;")
+                    ul
+                        li
+                            div
+                                a(way="/user/userMgmt" onclick="clickMenu(this)"
+                                onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") 用户管理
+
+        div(id="mainPanle" region="center" style="background: #f3f3f3; overflow-y:hidden;")
+            div(id="tabs" class="easyui-tabs" fit="true"  border="false" style="height: 100%;")
+                div(title="欢迎使用" style="padding:20px;overflow:hidden;" id="home")
+                    h1 欢迎使用溯源系统总部端平台

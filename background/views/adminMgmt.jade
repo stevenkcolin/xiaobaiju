@@ -1,0 +1,237 @@
+//
+   Created by ncs1207 on 2016/1/19.
+
+doctype html
+html
+    head
+        title JadeT
+        link(rel="stylesheet" type="text/css" href="/stylesheets/themes/default/easyui.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/themes/icon.css")
+        script(type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js')
+        script(type='text/javascript' src='/javascripts/jquery.easyui.min.js')
+        script.
+            $(document).ready(function () {
+                $('#dg').datagrid(
+                        {
+                            url: "/admin/searchByCondition",
+                            method: 'post',
+                            toolbar: "#toolbar",
+                            pagination: true,
+                            rownumbers: true,
+                            fitColumns: true,
+                            singleSelect: false,
+                            collapsible: true,
+                            remoteSort: true,
+                            height: 500,
+                            columns: [[
+                                {field: 'rowId', title: 'rowId', checkbox: true},
+                                {field: '_id', title: 'id'},
+                                {field: 'name', title: '姓名', width: 100},
+                                {field: 'loginAccount', title: '账号', width: 100}
+                            ]]
+                        });
+            });
+
+
+
+            function searchAdmin() {
+                var name = $("#name_search").val();
+                var loginAccount = $("#loginAccount_search").val();
+
+                $('#dg').datagrid('load', {
+                    name: name,
+                    loginAccount: loginAccount
+                });
+
+            }
+
+            function newAdmin() {
+                $('#dlg').dialog('open').dialog('setTitle', '创建新管理员');
+                $("#method").val("create");
+            }
+
+            function editAdmin() {
+                var row = $('#dg').datagrid('getChecked');
+                if (row.length === 0) {
+                    $.messager.alert('提示信息', '请选择一条数据........');
+                    return;
+                }
+                if (row.length > 1) {
+                    $.messager.alert('提示信息', '只能选择一条修改.......');
+                    return;
+                }
+                $.ajax({
+                    cache: true,
+                    type: 'post',
+                    url: '/admin/searchById',
+                    data: {
+                        adminId: row[0]._id.toString()
+                    },
+                    async: false,
+                    error: function (data) {
+                        $.messager.alert('提示信息', '操作失败!');
+                    },
+                    success: function (data) {
+                        // var res = eval('(' + data.result[0] + ')');
+                        var res = data.result[0];
+                        if (res) {
+                            $("#id_createOrEdit").val(res._id);
+                            $("#name_createOrEdit").textbox(
+                                    "setValue", res.name);
+                            $("#loginAccount_createOrEdit").textbox(
+                                    "setValue", res.loginAccount);
+                            $("#password_createOrEdit").textbox(
+                                    "setValue", res.password);
+                            $("#method").val("update");
+                            $('#dlg').dialog('open').dialog('setTitle',
+                                    '编辑');
+                        }
+                    }
+                });
+            }
+
+            function deleteAdmin() {
+                var row = $('#dg').datagrid('getChecked');
+                if (row.length === 0) {
+                    $.messager.alert('提示信息', '请选择一条数据........');
+                    return;
+                }
+                var adminIds = new Array();
+                for (var i = 0; i < row.length; i++) {
+                    adminIds.push(row[i]._id);
+                }
+                $.messager
+                        .confirm(
+                                '确认',
+                                '确定删除管理员吗？',
+                                function (r) {
+                                    if (r) {
+                                        $.ajax({
+                                            cache: true,
+                                            type: 'post',
+                                            url: '/admin/delete',
+                                            data: {
+                                                adminIds: adminIds.toString()
+                                            },
+                                            async: false,
+                                            error: function (data) {
+                                                $.messager.alert('提示信息',
+                                                        '操作失败!');
+                                            },
+                                            success: function (data) {
+                                                if (data.status == "success") {
+                                                    $('#dg')
+                                                            .datagrid(
+                                                                    'reload',
+                                                                    '/admin/searchByCondition');
+                                                }
+                                                //$("#method").val("modify");
+                                                $.messager.alert('提示信息',
+                                                        res.msgInfo);
+                                            }
+                                        });
+                                    }
+                                });
+
+            }
+
+            function closeDlg() {
+                //$("#method").val("modify");
+                $('#dlg').dialog('close');
+            }
+
+            function save() {
+                var _id = $("#id_createOrEdit").val();
+                var name = $.trim($("#name_createOrEdit").val());
+                var loginAccount = $.trim($("#loginAccount_createOrEdit").val());
+                var password = $.trim($("#password_createOrEdit").val());
+                var urlPost = "";
+                if ($("#method").val() === "create") urlPost = "/admin/create";
+
+                if ($("#method").val() === "update") urlPost = "/admin/update";
+
+                $.ajax({
+                    type: 'POST',
+                    url: urlPost,
+                    dataType: "json",
+                    data: {
+                        adminId: _id,
+                        name: name,
+                        loginAccount: loginAccount,
+                        password: password
+                    },
+
+                    success: function (data) {
+
+                        if (data.status == "success") {
+                            $('#dg').datagrid('reload');
+                            $('#dlg').dialog('close');
+                            //$("#method").val("modify");
+                        }
+                        //$.messager.alert('提示信息', res.msgInfo);
+                    },
+                    error: function (data) {
+                        $.messager.alert('提示信息', data.message);
+                    }
+                });
+            }
+    body
+        table(id="dg" title="管理员信息"  width="100%"
+        style="height: 100%;" data-options="fit:true" )
+            //thread
+                tr
+                    //th(field="id" checkbox="true")
+                    th(data-options="field:'name',width:80") 姓名
+                    th(data-options="field:'age',width:80") 年龄
+
+        div(id="toolbar")
+            table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
+                tr
+                    td(align="left" width="200px") Name
+                        input(class="easyui-textbox" type="text"
+                        name="name_search" id="name_search")
+                    td(align="left" width="200px") LoginFrom
+                        input(class="easyui-textbox" type="text"
+                        name="loginAccount_search" id="loginAccount_search")
+                tr
+                    td
+                        a(id="searchBtn" href="javascript:void(0)"
+                        class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
+                        onclick="searchAdmin()") 查询
+            a(id="save" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
+            iconcls="icon-add" plain="true" onclick="newAdmin()") 新增
+            a(id="delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
+            iconcls="icon-remove" plain="true" onclick="deleteAdmin()") 删除
+            a(id="update" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
+            iconcls="icon-edit" plain="true" onclick="editAdmin()") 修改
+
+        form(id="createOrEdit" method="post")
+            div(id="dlg" class="easyui-dialog"
+            data-options="closable:false,modal:true"
+            style="width: 600px; height: 300px; padding: 10px 20px; position: relative;"
+            closed="true" buttons="#dlg-buttons")
+                div(class="ftitle") 管理员信息
+                input(id="id_createOrEdit" type="hidden" )
+                div(class="fitem")
+                    label 姓名:
+                    input(id="name_createOrEdit" type="text" class="easyui-textbox")
+                    span(style="color: red;") *
+                div(class="fitem")
+                    label 账号:
+                    input(id="loginAccount_createOrEdit" type="text" class="easyui-textbox")
+                    span(style="color: red;") *
+                div(class="fitem")
+                    label 密码:
+                    input(id="password_createOrEdit" type="text" class="easyui-textbox")
+                    span(style="color: red;") *
+
+        div(id="dlg-buttons")
+            a(href="javascript:void(0)" class="easyui-linkbutton c6"
+            iconcls="icon-ok" onclick="save();" style="width: 90px") 保存
+            a(href="javascript:void(0)" class="easyui-linkbutton"
+            iconcls="icon-cancel" onclick="closeDlg();" style="width: 90px") 关闭
+        input(type="hidden" id="method" name="method" value="update")
+
+
+
+
