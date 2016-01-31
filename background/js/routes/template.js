@@ -21,39 +21,44 @@ router.all("*", function(req, res, next) {
 
 // get all template
 router.get("/", function(req, res, next) {
-    Template.find(function(err, doc) {
-        if (err) throw err;
-        successHandler.handle(doc, res);
-    });
-});
-
-// create a template
-router.post("/create", function(req, res) {
-    //todo add code to implement create template
-});
-
-// update a template
-router.post("/update/:id", function(req, res) {
-    var id = req.params.id;
-    //todo add code to implement update a template by id
-});
-
-// delete a template
-router.delete("/:id", function(req, res) {
-    var id = req.params.id;
-    //todo: add code to implement delete a template by id
-});
-
-// find template by parameter
-router.get("/find", function(req, res) {
-    //todo: find template by parameters
-    //todo: low priority
+    //todo: 获得所有的templates,并带着每个template下的ActionTypeId
+    //todo: 获得的templates应该是status=isPublished, 且type=官方发布的,为后续的私人template做准备.
 });
 
 // get a template by id
 router.get("/:id", function(req, res) {
     var id = req.params.id;
-    //todo: find a template by id
+    //todo: 根据Id获得一个template
+    //todo: 这个template还带着他所拥有的ActionType
 });
+
+// create a template
+router.post("/create", function(req, res) {
+    //todo: 新增一个Template
+    //todo: 这个template将带着ActionTypeId一起被create
+});
+
+// update a template
+router.post("/update/:id", function(req, res) {
+    var id = req.params.id;
+    //todo: 更新一个template
+    //todo: 这个template将带着ActionTypeId
+});
+
+// delete a template
+router.delete("/:id", function(req, res) {
+    var id = req.params.id;
+    //todo: 删除一个template
+});
+
+// find template by parameter
+router.get("/find", function(req, res) {
+    //todo: 找到一个template
+    //todo: low priority
+});
+
+
+
+
 
 module.exports = router;

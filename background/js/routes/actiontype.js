@@ -29,31 +29,33 @@ router.get("/", function(req, res, next) {
 
 // create a ActionType
 router.post("/create", function(req, res) {
-    //todo add code to implement create ActionType
+    //todo:新增一个ActionType
+    //todo:这个ActionType还带着PostLimit字段
 });
 
 // update a ActionType
 router.post("/update/:id", function(req, res) {
     var id = req.params.id;
-    //todo add code to implement update a ActionType by id
+    //todo:修改一个ActionType
+    //todo:这个ActionType还带着PostLimit字段
 });
 
 // delete a ActionType
 router.delete("/:id", function(req, res) {
     var id = req.params.id;
-    //todo: add code to implement delete a ActionType by id
+    //todo: 删除一个ActioinType
 });
 
 // find ActionType by parameter
 router.get("/find", function(req, res) {
-    //todo: find ActionType by parameters
+    //todo: 寻找一个ActionType
     //todo: low priority
 });
 
 // get a ActionType by id
 router.get("/:id", function(req, res) {
     var id = req.params.id;
-    //todo: find a ActionType by id
+    //todo: 根据Id找一个ActionType
 });
 
 module.exports = router;
