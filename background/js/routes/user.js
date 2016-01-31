@@ -175,8 +175,8 @@ router.get('/main', function(req, res) {
     res.render('userMain', { title: 'Hello, World!' });
 });
 
-router.get('/searchUser', function(req, res) {
-    res.render('searchUser', {});
+router.get('/userMgmt', function(req, res) {
+    res.render('userMgmt', {});
 });
 
 // 定义 about 页面的路由

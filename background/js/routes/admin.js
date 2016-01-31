@@ -9,7 +9,7 @@ var _ = require('underscore');
 var models = require("../models/model");
 var md5encrypt = require("../common/md5encrypt");
 var successHandler = require("../common/successHandler");
-var Admin = models.Admin;
+var Admin = models.ADMIN;
 
 var router = express.Router();
 
