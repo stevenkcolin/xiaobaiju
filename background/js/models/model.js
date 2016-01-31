@@ -18,7 +18,16 @@ var _USER = new Schema({
     createDate: Date
 });
 
-_User.index({loginFrom: 1, loginAccount: 1}, {unique: true});
+_USER.index({loginFrom: 1, loginAccount: 1}, {unique: true});
+
+// Define Admin schema
+var _ADMIN = new Schema({
+    loginAccount: {type: String, unique: true},
+    password : String,
+    name: String,
+    createDate: Date
+});
+
 
 // Define Task schema
 var _TASK = new Schema({
@@ -99,6 +108,7 @@ var _COMMENTEVENTS = new Schema ({
 // export them
 exports.USER = mongoose.model("USER", _USER, "USER");
 exports.TASK = mongoose.model("TASK", _TASK, "TASK");
+exports.ADMIN = mongoose.model("ADMIN", _ADMIN, "ADMIN");
 
 exports.TEMPLATE = mongoose.model("TEMPLATE", _TEMPLATE, "TEMPLATE");
 exports.ACTIONTYPE = mongoose.model("ACTIONTYPE",_ACTIONTYPE,"ACTIONTYPE");
