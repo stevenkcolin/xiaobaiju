@@ -12,6 +12,7 @@ html
         script(type='text/javascript' src='/javascripts/outlook2.js')
         script.
             function clickMenu(obj) {
+
                 var tabTitle = $(obj).text();
                 var url = $(obj).attr("way");
                 addTab(tabTitle, url);
@@ -26,9 +27,6 @@ html
             function mouseOutMenu(obj) {
                 $(obj).parent().removeClass("hover");
             }
-
-
-
     body(class="easyui-layout" style="overflow-y: hidden"  scroll="no")
         div(region="north" split="true" border="false" style="overflow: hidden; height: 80px;")
             span(style="float:right; padding-right:0px;padding-top:10px;" class="head")
@@ -37,7 +35,7 @@ html
                     a(class="styleswitch a2" style="CURSOR: pointer" title="黑色" rel="black")
                     a(class="styleswitch a3" style="CURSOR: pointer" title="白色" rel="metro")
                     a(class="styleswitch a4" style="CURSOR: pointer" title="黑灰色" rel="gray")
-                    div 欢迎: 用户
+                    div= "欢迎" + username
                         a(href="#" id="editpass") 修改密码
                         a(href="#" id="loginOut") 安全退出
 
@@ -68,4 +66,4 @@ html
         div(id="mainPanle" region="center" style="background: #f3f3f3; overflow-y:hidden;")
             div(id="tabs" class="easyui-tabs" fit="true"  border="false" style="height: 100%;")
                 div(title="欢迎使用" style="padding:20px;overflow:hidden;" id="home")
-                    h1 欢迎使用溯源系统总部端平台
+                    h1 欢迎使用小白驹后台管理
