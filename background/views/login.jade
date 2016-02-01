@@ -4,7 +4,7 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
-        title 小白驹后台管理平台
+        title= title
         script(type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js')
         script.
             function login() {
@@ -54,13 +54,13 @@ html
                     td(style="height: 60px;")
                         div(style="text-align: center;")
                             div(style="width: 300px;padding-top: 4px;background: url(images/input_box.png) no-repeat;height: 50px;margin: 0 auto;")
-                                span(style="font-size: 14px;color: gray;") 账号
-                                 input(type="text" id="userid" name="userid" style="width: 200px;border:0px;background-color:transparent;height: 30px;font-size: 24px;")
+                                span(style="font-size: 14px;color: gray;") 账号<b>:</b>&nbsp;&nbsp;
+                                input(type="text" id="userid" name="userid" style="width: 200px;border:0px;background-color:transparent;height: 30px;font-size: 24px;")
                 tr
                     td(style="height: 60px;")
                         div(style="text-align: center;")
                             div(style="width: 300px;padding-top: 4px;background: url(images/input_box.png) no-repeat;height: 50px;margin: 0 auto;")
-                                span(style="font-size: 14px;color: gray;") 密码
+                                span(style="font-size: 14px;color: gray;") 密码<b>:</b>&nbsp;&nbsp;
                                 input(onkeypress="if(event.keyCode==13) document.getElementById('loginDiv').click()"
                                 type="password" id="userpwd" name="userpwd" style="width: 200px;border:0px;background-color:transparent;height: 30px;font-size: 24px;")
                 tr

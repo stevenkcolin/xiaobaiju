@@ -4,7 +4,7 @@
 doctype html
 html
     head
-        title JadeT
+
         link(rel="stylesheet" type="text/css" href="/stylesheets/themes/default/easyui.css")
         link(rel="stylesheet" type="text/css" href="/stylesheets/themes/icon.css")
         script(type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js')
@@ -14,7 +14,7 @@ html
                 $('#dg').datagrid(
                         {
                             url: "/admin/searchByCondition",
-                            method: 'post',
+                            method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
                             rownumbers: true,

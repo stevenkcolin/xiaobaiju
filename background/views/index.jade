@@ -2,7 +2,7 @@ doctype html
 html
     head(id="Head1")
         meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
-        title JadeT
+        title= title
         link(rel="stylesheet" type="text/css" href="/stylesheets/themes/gray/easyui.css")
         link(rel="stylesheet" type="text/css" href="/stylesheets/default.css")
         link(rel="stylesheet" type="text/css" href="/stylesheets/themes/icon.css")
@@ -28,15 +28,13 @@ html
                 $(obj).parent().removeClass("hover");
             }
     body(class="easyui-layout" style="overflow-y: hidden"  scroll="no")
-        div(region="north" split="true" border="false" style="overflow: hidden; height: 80px;")
+        div(region="north" split="true" border="false" style="overflow: hidden; height: 80px;background: #15a4fa repeat-x center 50%;line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体")
             span(style="float:right; padding-right:0px;padding-top:10px;" class="head")
                 div(class="anniu" style="float: right;")
-                    a(class="styleswitch a1" style="CURSOR: pointer" title="默认" rel="default")
-                    a(class="styleswitch a2" style="CURSOR: pointer" title="黑色" rel="black")
-                    a(class="styleswitch a3" style="CURSOR: pointer" title="白色" rel="metro")
-                    a(class="styleswitch a4" style="CURSOR: pointer" title="黑灰色" rel="gray")
-                    div= "欢迎" + username
+                    div= "欢迎:  " + username
+                        | &nbsp;
                         a(href="#" id="editpass") 修改密码
+                        | &nbsp;
                         a(href="#" id="loginOut") 安全退出
 
             span(style="padding-left:10px;")
