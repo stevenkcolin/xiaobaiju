@@ -65,10 +65,10 @@ module.exports = {
         });
     },
     searchByCondition: function (req, res, next) {
-        if (req.query.name === undefined) {
-            successHandler.handle(null, res);
-            return;
-        }
+        //if (req.query.name === undefined) {
+        //    successHandler.handle(null, res);
+        //    return;
+        //}
 
         var name = req.query.name;
         var loginAccount = req.query.loginAccount;
