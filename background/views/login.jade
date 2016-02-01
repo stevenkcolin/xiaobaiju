@@ -1,0 +1,70 @@
+//
+   Created by ncs1207 on 2016/1/31.
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        title= title
+        script(type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js')
+        script.
+            function login() {
+                var userid = $("#userid").val();
+                var userpwd = $("#userpwd").val();
+                if ("" == userid) {
+                    alert("用户名不能为空");
+                    return;
+                }
+                if ("" == userpwd) {
+                    alert("密码不能为空");
+                    return;
+                }
+                $.ajax({
+                    cache: true,
+                    type: 'post',
+                    url: '/admin/login',
+                    data: $('#login').serialize(),
+                    async: false,
+                    error: function (data) {
+                        $.messager.alert('提示信息', '操作失败!');
+                    },
+                    success: function (data) {
+                        if (data.status === "success") {
+                            window.location.href = "/index";
+                        }
+                        else {
+                            alert("登录失败");
+                        }
+                    }
+                });
+            }
+    body(style="margin:0;padding:0;overflow: hidden;")
+        img(style="overflow: hidden;margin:0;padding:0;position:absolute;left:0px;top:0px;width:100%;height:100%;z-Index:-1; border:0px solid red;" src="images/login_bg.jpg")
+        form(id="login")
+            table(style="margin:auto;margin-top: 80px;text-align: center;"  cellpadding="0" cellspacing="0" border="0" width="600px")
+                tr
+                    td
+                        div(style="width: 100%")
+                            img(src="images/yum_logo_login.png")
+                            span(style="color:#ffffff;font-size:28px;") 测试用
+                tr(height="100px;")
+                    td
+                        span(style="color:#ffffff;font-size:30px;") 后台管理系统
+                tr(height="40px;")
+                tr
+                    td(style="height: 60px;")
+                        div(style="text-align: center;")
+                            div(style="width: 300px;padding-top: 4px;background: url(images/input_box.png) no-repeat;height: 50px;margin: 0 auto;")
+                                span(style="font-size: 14px;color: gray;") 账号<b>:</b>&nbsp;&nbsp;
+                                input(type="text" id="userid" name="userid" style="width: 200px;border:0px;background-color:transparent;height: 30px;font-size: 24px;")
+                tr
+                    td(style="height: 60px;")
+                        div(style="text-align: center;")
+                            div(style="width: 300px;padding-top: 4px;background: url(images/input_box.png) no-repeat;height: 50px;margin: 0 auto;")
+                                span(style="font-size: 14px;color: gray;") 密码<b>:</b>&nbsp;&nbsp;
+                                input(onkeypress="if(event.keyCode==13) document.getElementById('loginDiv').click()"
+                                type="password" id="userpwd" name="userpwd" style="width: 200px;border:0px;background-color:transparent;height: 30px;font-size: 24px;")
+                tr
+                    td(style="height: 60px;")
+                        div(style="text-align: center;")
+                            div(id="loginDiv" onclick="login()" style="width: 200px;background: url(images/login_btn.png) no-repeat;height: 45px;margin: 0 auto;cursor:pointer;")
+                                span(style="color: #ffffff ;font-size: 34px; padding-top: 20px;font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;") 登录
