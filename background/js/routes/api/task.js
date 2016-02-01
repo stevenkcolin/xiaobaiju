@@ -7,8 +7,8 @@
 var express = require("express");
 var _ = require('underscore');
 
-var models = require("../models/model");
-var successHandler = require("../common/successHandler");
+var models = require("../../models/model");
+var successHandler = require("../../common/successHandler");
 var Task = models.TASK;
 
 var router = express.Router();

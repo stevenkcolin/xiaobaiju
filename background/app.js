@@ -8,13 +8,13 @@ var orm = require("orm");
 
 var errorHandler = require("./js/common/errorHandler");
 var constant = require("./js/common/constant");
-var index = require('./js/routes/index');
-var admin = require("./js/routes/admin");
-var user = require("./js/routes/user");
-var task = require("./js/routes/task");
-var template = require("./js/routes/template");
-var actiontype = require("./js/routes/actiontype");
-var reportInfo = require("./js/routes/reportInfo");
+var adminIndex = require('./js/routes/admin/index');
+var admin = require("./js/routes/api/admin");
+var user = require("./js/routes/api/user");
+var task = require("./js/routes/api/task");
+var template = require("./js/routes/api/template");
+var actiontype = require("./js/routes/api/actiontype");
+var reportInfo = require("./js/routes/api/reportInfo");
 var sqldbConfig = require("./js/config/sqlDB.json");
 require("./js/common/dbUtils");
 
@@ -35,33 +35,33 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("express-domain-middleware"));
 
 //db connection by using orm
-//app.use(orm.express(sqldbConfig, {
-//    define: function(db, models, next) {
-//        var listModels = require("./js/models/sqlModel");
-//        listModels(db, models);
-//        next();
-//    }
-//}));
-// user routers for "/" url
-app.use("/", index);
+app.use(orm.express(sqldbConfig, {
+    define: function(db, models, next) {
+        var listModels = require("./js/models/sqlModel");
+        listModels(db, models);
+        next();
+    }
+}));
+// Backend admin page
+app.use("/admin", adminIndex);
 
 // user routers for "/admin" url
-app.use("/admin", admin);
+app.use("/api/admin", admin);
 
 // user routers for "/user" url
-app.use("/user", user);
+app.use("/api/user", user);
 
 // task routers for "/task" url
-app.use("/task", task);
+app.use("/api/task", task);
 
 // template routers for "/template" url
-app.use("/template",template);
+app.use("/api/template",template);
 
 // template routers for "/actiontype" url
-app.use("/actiontype",actiontype);
+app.use("/api/actiontype",actiontype);
 
 // template routers for "/reportInfo" url
-app.use("/reportInfo", reportInfo);
+app.use("/api/reportInfo", reportInfo);
 
 //send response if success
 app.use(function(req, res) {

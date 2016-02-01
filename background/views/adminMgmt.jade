@@ -13,7 +13,7 @@ html
             $(document).ready(function () {
                 $('#dg').datagrid(
                         {
-                            url: "/admin/searchByCondition",
+                            url: "/api/admin/searchByCondition",
                             method: 'post',
                             toolbar: "#toolbar",
                             pagination: true,
@@ -63,7 +63,7 @@ html
                 $.ajax({
                     cache: true,
                     type: 'post',
-                    url: '/admin/searchById',
+                    url: '/api/admin/searchById',
                     data: {
                         adminId: row[0]._id.toString()
                     },
@@ -109,7 +109,7 @@ html
                                         $.ajax({
                                             cache: true,
                                             type: 'post',
-                                            url: '/admin/delete',
+                                            url: '/api/admin/delete',
                                             data: {
                                                 adminIds: adminIds.toString()
                                             },
@@ -123,7 +123,7 @@ html
                                                     $('#dg')
                                                             .datagrid(
                                                                     'reload',
-                                                                    '/admin/searchByCondition');
+                                                                    '/api/admin/searchByCondition');
                                                 }
                                                 //$("#method").val("modify");
                                                 $.messager.alert('提示信息',
@@ -146,9 +146,9 @@ html
                 var loginAccount = $.trim($("#loginAccount_createOrEdit").val());
                 var password = $.trim($("#password_createOrEdit").val());
                 var urlPost = "";
-                if ($("#method").val() === "create") urlPost = "/admin/create";
+                if ($("#method").val() === "create") urlPost = "/api/admin/create";
 
-                if ($("#method").val() === "update") urlPost = "/admin/update";
+                if ($("#method").val() === "update") urlPost = "/api/admin/update";
 
                 $.ajax({
                     type: 'POST',

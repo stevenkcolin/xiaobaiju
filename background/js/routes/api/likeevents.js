@@ -3,10 +3,10 @@
  */
 var express = require("express");
 
-var models = require("../models/sqlModel");
-var successHandler = require("../common/successHandler");
+var models = require("../../models/sqlModel");
+var successHandler = require("../../common/successHandler");
 var LikeEvents = models.LIKEEVENTS;
-var transactionHandler = require("../common/transactionHandler");
+var transactionHandler = require("../../common/transactionHandler");
 
 var router = express.Router();
 

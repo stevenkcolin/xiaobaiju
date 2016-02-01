@@ -6,9 +6,9 @@
 var express = require("express");
 var _ = require('underscore');
 
-var models = require("../models/model");
-var md5encrypt = require("../common/md5encrypt");
-var successHandler = require("../common/successHandler");
+var models = require("../../models/model");
+var md5encrypt = require("../../common/md5encrypt");
+var successHandler = require("../../common/successHandler");
 var User = models.USER;
 
 var router = express.Router();
@@ -169,14 +169,6 @@ router.post("/loginByOther", function(req, res, next) {
 
 router.get('/', function(req, res, next) {
 	res.send('respond with a resource');
-});
-
-router.get('/main', function(req, res) {
-    res.render('userMain', { title: 'Hello, World!' });
-});
-
-router.get('/userMgmt', function(req, res) {
-    res.render('userMgmt', {});
 });
 
 // 定义 about 页面的路由

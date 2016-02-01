@@ -13,7 +13,7 @@ html
             $(document).ready(function () {
                 $('#dg').datagrid(
                         {
-                            url: "/user/searchByCondition",
+                            url: "/api/user/searchByCondition",
                             method: 'post',
                             toolbar: "#toolbar",
                             pagination: true,
@@ -65,7 +65,7 @@ html
                 $.ajax({
                     cache: true,
                     type: 'post',
-                    url: '/user/searchById',
+                    url: '/api/user/searchById',
                     data: {
                         userId: row[0]._id.toString()
                     },
@@ -116,7 +116,7 @@ html
                                         $.ajax({
                                             cache: true,
                                             type: 'post',
-                                            url: '/user/delete',
+                                            url: '/api/user/delete',
                                             data: {
                                                 userIds: userIds.toString()
                                             },
@@ -130,7 +130,7 @@ html
                                                     $('#dg')
                                                             .datagrid(
                                                                     'reload',
-                                                                    '/user/searchByCondition');
+                                                                    '/api/user/searchByCondition');
                                                 }
                                                 //$("#method").val("modify");
                                                 $.messager.alert('提示信息',
@@ -156,9 +156,9 @@ html
                 var phone = $.trim($("#phone_createOrEdit").val());
                 var urlPost = "";
                 if ($("#method").val() === "create") {
-                    urlPost = "/user/create";
+                    urlPost = "/api/user/create";
                 }
-                if ($("#method").val() === "update") urlPost = "/user/update";
+                if ($("#method").val() === "update") urlPost = "/api/user/update";
 
                 $.ajax({
                     type: 'POST',
