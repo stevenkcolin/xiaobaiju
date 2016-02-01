@@ -62,7 +62,7 @@ html
                 }
                 $.ajax({
                     cache: true,
-                    type: 'post',
+                    type: 'get',
                     url: '/api/admin/searchById',
                     data: {
                         adminId: row[0]._id.toString()
