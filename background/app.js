@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
             next()
         }
         else {
-            return res.redirect("/login");
+            return res.redirect("/admin/login");
         }
     }
     next();
