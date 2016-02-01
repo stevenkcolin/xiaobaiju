@@ -31,8 +31,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
     secret: '12345',
-    name: 'testapp',   //ÕâÀïµÄnameÖµµÃÊÇcookieµÄname£¬Ä¬ÈÏcookieµÄnameÊÇ£ºconnect.sid
-    cookie: {maxAge: 80000},  //ÉèÖÃmaxAgeÊÇ80000ms£¬¼´80sºósessionºÍÏàÓ¦µÄcookieÊ§Ð§¹ýÆÚ
+    name: 'testapp',   //ï¿½ï¿½ï¿½ï¿½ï¿½nameÖµï¿½ï¿½ï¿½ï¿½cookieï¿½ï¿½nameï¿½ï¿½Ä¬ï¿½ï¿½cookieï¿½ï¿½nameï¿½Ç£ï¿½connect.sid
+    cookie: {maxAge: 1200000},  //ï¿½ï¿½ï¿½ï¿½maxAgeï¿½ï¿½80000msï¿½ï¿½ï¿½ï¿½80sï¿½ï¿½sessionï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½cookieÊ§Ð§ï¿½ï¿½ï¿½ï¿½
     resave: false,
     saveUninitialized: true,
 }));
@@ -42,23 +42,23 @@ app.use(express.static(path.join(__dirname, "public")));
 //use domain middleware
 app.use(require("express-domain-middleware"));
 
-//db connection by using orm
-app.use(orm.express(sqldbConfig, {
-    define: function(db, models, next) {
-        var listModels = require("./js/models/sqlModel");
-        listModels(db, models);
-        next();
-    }
-}));
+////db connection by using orm
+//app.use(orm.express(sqldbConfig, {
+//    define: function(db, models, next) {
+//        var listModels = require("./js/models/sqlModel");
+//        listModels(db, models);
+//        next();
+//    }
+//}));
 
 app.use(function (req, res, next) {
     var url = req.originalUrl;
-    if (url != "/login" && !req.session.user) {
-        if (url === "/admin/login") {
+    if (url != "/admin/login" && !req.session.user) {
+        if (url === "/api/admin/login") {
             next()
         }
         else {
-            return res.redirect("/login");
+            return res.redirect("/admin/login");
         }
     }
     next();

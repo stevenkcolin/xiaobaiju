@@ -13,7 +13,7 @@ html
                 $('#dg').datagrid(
                         {
                             url: "/api/user/searchByCondition",
-                            method: 'post',
+                            method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
                             rownumbers: true,
@@ -63,7 +63,7 @@ html
                 }
                 $.ajax({
                     cache: true,
-                    type: 'post',
+                    type: 'get',
                     url: '/api/user/searchById',
                     data: {
                         userId: row[0]._id.toString()
