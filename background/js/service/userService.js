@@ -32,6 +32,7 @@ module.exports = {
     update: function(req, res, next) {
         var userId = req.body.userId;
         var param = req.body;
+        var password = md5encrypt.encrypt(req.body.password);
         User.update({"_id" : userId}, {$set:param},function(err, doc) {
             if (err) throw err;
             successHandler.handle(doc, res);

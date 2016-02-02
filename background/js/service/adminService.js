@@ -10,11 +10,8 @@ var _ = require('underscore');
 module.exports = {
     login: function(req, res, next) {
         var userid = req.body.userid;
-        var userpwd = req.body.userpwd;
-        //var encoded = req.body.encoded;
-        //if (encoded !== true) {
-        //    password = md5encrypt.encrypt(password);
-        //}
+        var userpwd = md5encrypt.encrypt(req.body.userpwd);
+
         Admin.find({loginAccount: userid, password: userpwd}, function(err, doc) {
             if (err) throw err;
             if (doc.length > 0) {
@@ -29,7 +26,8 @@ module.exports = {
 
     updatePwd: function(req, res, next) {
         var adminId = req.session.user[0]._id;
-        var param = {"password": req.body.newPwd};
+        var newPwd = md5encrypt.encrypt(req.body.newPwd);
+        var param = {"password": newPwd};
         Admin.update({"_id" : adminId}, {$set:param},function(err, doc) {
             if (err) throw err;
             successHandler.handle(doc, res);
@@ -38,7 +36,7 @@ module.exports = {
 
     create: function(req, res, next) {
         var admin = new Admin();
-        //if (req.body.password) req.body.password = md5encrypt.encrypt(req.body.password);
+        if (req.body.password) req.body.password = md5encrypt.encrypt(req.body.password);
         _.extend(admin, req.body);
         admin.createDate = new Date();
         admin.save(function(err, doc){
@@ -59,6 +57,8 @@ module.exports = {
     update: function(req, res, next) {
         var adminId = req.body.adminId;
         var param = req.body;
+        var password = md5encrypt.encrypt(req.body.password);
+        param.password = password;
         Admin.update({"_id" : adminId}, {$set:param},function(err, doc) {
             if (err) throw err;
             successHandler.handle(doc, res);
