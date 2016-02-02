@@ -26,6 +26,16 @@ module.exports = {
 
         });
     },
+
+    updatePwd: function(req, res, next) {
+        var adminId = req.session.user[0]._id;
+        var param = {"password": req.body.newPwd};
+        Admin.update({"_id" : adminId}, {$set:param},function(err, doc) {
+            if (err) throw err;
+            successHandler.handle(doc, res);
+        })
+    },
+
     create: function(req, res, next) {
         var admin = new Admin();
         //if (req.body.password) req.body.password = md5encrypt.encrypt(req.body.password);

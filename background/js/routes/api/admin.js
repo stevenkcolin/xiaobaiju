@@ -23,6 +23,11 @@ router.post("/login", function(req, res, next) {
     adminService.login(req, res, next);
 });
 
+// admin change password
+router.post("/updatePwd", function(req, res, next) {
+    adminService.updatePwd(req, res, next);
+});
+
 // create admin
 router.post("/create", function(req, res, next) {
     adminService.create(req, res, next);
