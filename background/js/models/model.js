@@ -5,8 +5,24 @@
 
 
 var mongoose = require("mongoose");
+var _ = require("underscore");
 
 var Schema = mongoose.Schema;
+
+var baseClass = {
+    createdDate : Date,
+    lastModifiedDate : Date
+};
+
+var userBaseClass = _.extend({
+    createdBy : {type: Schema.Types.ObjectId, ref: "USER"},
+    lastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"}
+}, baseClass);
+
+var adminBaseClass = _.extend({
+    createdBy : {type: Schema.Types.ObjectId, ref: "ADMIN"},
+    lastModifiedBy : {type: Schema.Types.ObjectId, ref: "ADMIN"}
+}, baseClass);
 
 // Define User schema
 var _USER = new Schema({
@@ -21,98 +37,64 @@ var _USER = new Schema({
 _USER.index({loginFrom: 1, loginAccount: 1}, {unique: true});
 
 // Define Admin schema
-var _ADMIN = new Schema({
+var _ADMIN = new Schema(_.extend({
     loginAccount: {type: String, unique: true},
     password : String,
-    name: String,
-    createDate: Date
-});
+    name: String
+}, adminBaseClass));
 
 
 // Define Task schema
-var _TASK = new Schema({
+var _TASK = new Schema(_.extend({
     title : String,
     description : String,
     dueDate: Date,
-    createDate: Date,
     completed: Boolean,
-    user: {type: Schema.Types.ObjectId, ref: "USER"},
-
-    //below fields are in all tables
-    CreatedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    CreatedDate : Date,
-    LastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    LastModifiedDate : Date
-});
+    user: {type: Schema.Types.ObjectId, ref: "USER"}
+}, userBaseClass));
 
 // added by chenlin on 2016
 
-var _TEMPLATE = new Schema ({
-    templateName : String,
-    ActionTypeList : Array,
-    TemplateStatus : String,
-    TemplateType : String,
-    //below fields are in all tables
-    CreatedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    CreatedDate : Date,
-    LastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    LastModifiedDate : Date
+var _TEMPLATE = new Schema(_.extend({
+    name : String,
+    actionTypeList : [{type: Schema.Types.ObjectId, ref: "ACTIONTYPE"}],
+    status : Number, //0:draft, 1:published, 2:retired
+    type : String
+}, adminBaseClass));
+
+
+var _ACTIONTYPE = new Schema(_.extend({
+    name : String,
+    postLimit : String
+}, adminBaseClass));
+
+
+var _LIKESCHEMA = new Schema ({
+    createdBy : {type: Schema.Types.ObjectId, ref: "USER"},
+    createdDate : Date
 });
 
 
-var _ACTIONTYPE = new Schema ({
-    ActionTypeName : String,
-    ActionPostLimit : String,
-    //below fields are in all tables
-    CreatedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    CreatedDate : Date,
-    LastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    LastModifiedDate : Date
-});
+var _POSTACTIONS = new Schema(_.extend({
+    actionTypeId: {type: Schema.Types.ObjectId, ref: "ACTIONTYPE"},
+    isShared: Boolean,
+    title: String,
+    url: String,
+    like: [_LIKESCHEMA],
+    comments: [{type: Schema.Types.ObjectId, ref: "COMMENTS"}]
+}, userBaseClass));
 
 
-var _POSTACTIONS = new Schema ({
-    ActionTypeId: {type: Schema.Types.ObjectId, ref: "ACTIONTYPE"},
-    IsShared : Boolean,
-    Title : String,
-    URL : String,
-    //below fields are in all tables
-    CreatedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    CreatedDate : Date,
-    LastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    LastModifiedDate : Date
-});
-
-
-var _LIKEEVENTS = new Schema ({
-    PostActionId: {type: Schema.Types.ObjectId, ref: "POSTACTIONS"},
-    IsLiked : Boolean,
-    //below fields are in all tables
-    CreatedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    CreatedDate : Date,
-    LastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    LastModifiedDate : Date
-});
-
-var _COMMENTEVENTS = new Schema ({
-    PostActionId: {type: Schema.Types.ObjectId, ref: "POSTACTIONS"},
+var _COMMENTS = new Schema(_.extend({
     CommentContent : String,
-    Parent: {type: Schema.Types.ObjectId,ref:"COMMENTEVENTS"},
-    //below fields are in all tables
-    CreatedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    CreatedDate : Date,
-    LastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    LastModifiedDate : Date
-});
+    Parent: {type: Schema.Types.ObjectId,ref:"COMMENTS"}
+}, userBaseClass));
 
 // export them
 exports.USER = mongoose.model("USER", _USER, "USER");
 exports.TASK = mongoose.model("TASK", _TASK, "TASK");
 exports.ADMIN = mongoose.model("ADMIN", _ADMIN, "ADMIN");
-
 exports.TEMPLATE = mongoose.model("TEMPLATE", _TEMPLATE, "TEMPLATE");
 exports.ACTIONTYPE = mongoose.model("ACTIONTYPE",_ACTIONTYPE,"ACTIONTYPE");
 exports.POSTACTIONS = mongoose.model("POSTACTIONS", _POSTACTIONS,"POSTACTIONS");
-
-exports.LIKEEVENTS = mongoose.model("LIKEEVENTS", _LIKEEVENTS,"LIKEEVENTS");
-exports.COMMENTEVENTS = mongoose.model("COMMENTEVENTS", _COMMENTEVENTS,"COMMENTEVENTS");
+exports.COMMENTS = mongoose.model("COMMENTS", _COMMENTS, "COMMENTS");

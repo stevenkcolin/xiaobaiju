@@ -14,7 +14,7 @@ var admin = require("./js/routes/api/admin");
 var user = require("./js/routes/api/user");
 var task = require("./js/routes/api/task");
 var template = require("./js/routes/api/template");
-var actiontype = require("./js/routes/api/actiontype");
+var actionType = require("./js/routes/api/actionType");
 var reportInfo = require("./js/routes/api/reportInfo");
 var sqldbConfig = require("./js/config/sqlDB.json");
 require("./js/common/dbUtils");
@@ -51,19 +51,6 @@ app.use(orm.express(sqldbConfig, {
     }
 }));
 
-app.use(function (req, res, next) {
-    var url = req.originalUrl;
-    if (url != "/login" && !req.session.user) {
-        if (url === "/admin/login") {
-            next()
-        }
-        else {
-            return res.redirect("/admin/login");
-        }
-    }
-    next();
-});
-
 // Backend admin page
 app.use("/admin", adminIndex);
 
@@ -80,7 +67,7 @@ app.use("/api/task", task);
 app.use("/api/template",template);
 
 // template routers for "/actiontype" url
-app.use("/api/actiontype",actiontype);
+app.use("/api/actiontype",actionType);
 
 // template routers for "/reportInfo" url
 app.use("/api/reportInfo", reportInfo);
