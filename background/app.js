@@ -29,13 +29,7 @@ app.use(favicon());
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({
-    secret: '12345',
-    name: 'testapp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-    cookie: {maxAge: 1200000},  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
-    resave: false,
-    saveUninitialized: true,
-}));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -50,19 +44,6 @@ app.use(orm.express(sqldbConfig, {
         next();
     }
 }));
-
-app.use(function (req, res, next) {
-    var url = req.originalUrl;
-    if (url != "/admin/login" && !req.session.user) {
-        if (url === "/api/admin/login") {
-            next()
-        }
-        else {
-            return res.redirect("/admin/login");
-        }
-    }
-    next();
-});
 
 // Backend admin page
 app.use("/admin", adminIndex);
