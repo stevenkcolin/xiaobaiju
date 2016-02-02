@@ -2,7 +2,7 @@ doctype html
 html
     head(id="Head1")
         meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
-        title= title
+        title 测试用后台管理平台
         link(rel="stylesheet" type="text/css" href="/stylesheets/themes/gray/easyui.css")
         link(rel="stylesheet" type="text/css" href="/stylesheets/default.css")
         link(rel="stylesheet" type="text/css" href="/stylesheets/themes/icon.css")
@@ -49,13 +49,13 @@ html
                         li
                             div
                                 a(way="/admin/adminMgmt" onclick="clickMenu(this)"
-                                onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") 管理员管理
+                                onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") <span class="icon icon-nav" ></span> 管理员管理
                 div(title="数据管理" icon="icon-nav" style="overflow:auto;")
                     ul
                         li
                             div
-                                a(way="/user/userMgmt" onclick="clickMenu(this)"
-                                onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") 用户管理
+                                a(way="/admin/userMgmt" onclick="clickMenu(this)"
+                                onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") <span class="icon icon-nav" ></span> 用户管理
 
         div(id="mainPanle" region="center" style="background: #f3f3f3; overflow-y:hidden;")
             div(id="tabs" class="easyui-tabs" fit="true"  border="false" style="height: 100%;")

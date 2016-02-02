@@ -2,24 +2,20 @@
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/index', function(req, res, next) {
+  res.render('index', { username: req.session.user[0].name });
 });
 
-router.get('/main', function(req, res) {
-  res.render('adminMain', { title: 'Hello, World!' });
+router.get('/login', function(req, res) {
+  res.render('login');
 });
 
 router.get('/adminMgmt', function(req, res) {
-  res.render('adminMgmt', {});
+  res.render('adminMgmt');
 });
 
-router.get('/user/main', function(req, res) {
-  res.render('userMain', { title: 'Hello, World!' });
-});
-
-router.get('/user/userMgmt', function(req, res) {
-  res.render('userMgmt', {});
+router.get('/userMgmt', function(req, res) {
+  res.render('userMgmt');
 });
 
 router.get('/login', function (req, res, next) {
