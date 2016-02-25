@@ -22,7 +22,7 @@ router.all("*", function(req, res, next) {
 
 // get all template
 router.get("/published", function(req, res, next) {
-    Template.find({status: constant.TEMPLATE_STATUS_PUBLISHED}, {name:1}, "status", function(err, doc) {
+    Template.find({status: constant.TEMPLATE_STATUS_PUBLISHED}, {name:1}, function(err, doc) {
         if (err) throw err;
         successHandler.handle(doc, res);
     });
@@ -32,9 +32,21 @@ router.get("/published", function(req, res, next) {
 router.get("/detail", function(req, res, next) {
     var id = req.query.id;
     var limit = req.query.limit;
-    Template.findById(id).populate('actionTypeList').exec(function(err, doc) {
+    Template.findById(id).populate('actionTypeList').exec(function(err, template) {
         if (err) throw err;
-        successHandler.handle(doc, res);
+        var actionTypeList = template._doc.actionTypeList;
+        var PostActions = models.POSTACTIONS;
+        var count = 0;
+        actionTypeList.map(function(actionTypeDoc, index) {
+            var actionType = actionTypeDoc._doc;
+            PostActions.find({actionTypeId: actionType._id, isShared: true}, {title: 1}).limit(limit).sort("-lastModifiedDate").exec(function(err, postAction) {
+                count++;
+                actionType.postActionList = postAction;
+                if (count === actionTypeList.length) {
+                    successHandler.handle(template, res);
+                }
+            });
+        });
     });
 });
 
@@ -52,9 +64,5 @@ router.get("/actionType", function(req, res, next) {
         successHandler.handle(doc, res);
     })
 });
-
-
-
-
 
 module.exports = router;
