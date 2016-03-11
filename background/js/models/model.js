@@ -86,8 +86,9 @@ var _POSTACTIONS = new Schema(_.extend({
 
 
 var _COMMENTS = new Schema(_.extend({
-    CommentContent : String,
-    Parent: {type: Schema.Types.ObjectId,ref:"COMMENTS"}
+    content : String,
+    parent: {type: Schema.Types.ObjectId,ref:"COMMENTS"},
+    replyTo: {type: Schema.Types.ObjectId, ref: "USER"}
 }, userBaseClass));
 
 // export them
