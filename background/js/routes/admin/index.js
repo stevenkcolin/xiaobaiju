@@ -4,14 +4,14 @@ var router = express.Router();
 // 拦截器
 router.use(function (req, res, next) {
     var url = req.originalUrl;
-    if (url != "/admin/login" && !req.session.user) {
-        if (url === "/api/admin/login") {
-            next()
-        }
-        else {
-            return res.redirect("/admin/login");
-        }
-    }
+    //if (url != "/admin/login" && !req.session.user) {
+    //    if (url === "/api/admin/login") {
+    //        next()
+    //    }
+    //    else {
+    //        return res.redirect("/admin/login");
+    //    }
+    //}
     next();
 });
 
