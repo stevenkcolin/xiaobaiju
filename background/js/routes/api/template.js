@@ -35,18 +35,25 @@ router.get("/detail", function(req, res, next) {
     Template.findById(id).populate('actionTypeList').exec(function(err, template) {
         if (err) throw err;
         var actionTypeList = template._doc.actionTypeList;
-        var PostActions = models.POSTACTIONS;
-        var count = 0;
-        actionTypeList.map(function(actionTypeDoc, index) {
-            var actionType = actionTypeDoc._doc;
-            PostActions.find({actionTypeId: actionType._id, isShared: true}, {title: 1}).limit(limit).sort("-lastModifiedDate").exec(function(err, postAction) {
-                count++;
-                actionType.postActionList = postAction;
-                if (count === actionTypeList.length) {
-                    successHandler.handle(template, res);
-                }
+        if (actionTypeList.length) {
+            var PostActions = models.POSTACTIONS;
+            var count = 0;
+            actionTypeList.map(function (actionTypeDoc, index) {
+                var actionType = actionTypeDoc._doc;
+                PostActions.find({
+                    actionTypeId: actionType._id,
+                    isShared: true
+                }, {title: 1}).limit(limit).sort("-lastModifiedDate").exec(function (err, postAction) {
+                    count++;
+                    actionType.postActionList = postAction;
+                    if (count === actionTypeList.length) {
+                        successHandler.handle(template, res);
+                    }
+                });
             });
-        });
+        } else {
+            successHandler.handle(template, res);
+        }
     });
 });
 

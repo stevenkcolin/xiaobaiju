@@ -59,7 +59,8 @@ var _TEMPLATE = new Schema(_.extend({
     name : String,
     actionTypeList : [{type: Schema.Types.ObjectId, ref: "ACTIONTYPE"}],
     status : Number, //0:draft, 1:published, 2:retired
-    type : String
+    type : String,
+    background : String
 }, adminBaseClass));
 
 
