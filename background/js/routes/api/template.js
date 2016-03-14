@@ -22,7 +22,7 @@ router.all("*", function(req, res, next) {
 
 // get all template
 router.get("/published", function(req, res, next) {
-    Template.find({status: constant.TEMPLATE_STATUS_PUBLISHED}, {name:1}, function(err, doc) {
+    Template.find({status: constant.TEMPLATE_STATUS_PUBLISHED}, {name:1, background:1}, function(err, doc) {
         if (err) throw err;
         successHandler.handle(doc, res);
     });

@@ -18,9 +18,9 @@ router.all("*", function(req, res, next) {
 // admin login
 router.get("/download", function(req, res, next) {
     var filepath = req.query.filepath;
-    var filename = req.query.filename;
-    console.log(path.normalize(filepath, filename))
-    res.download(path.join(process.cwd(), filepath, filename));
+    //var filename = req.query.filename;
+    console.log(path.join(process.cwd(), filepath));
+    res.download(path.join(process.cwd(), filepath));
 });
 
 module.exports = router;
