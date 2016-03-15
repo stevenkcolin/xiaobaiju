@@ -1,0 +1,590 @@
+[2016-01-30 17:50:17.284] [ERROR] log_file - Error: d:\PROJECTS\xiaobaiju\background\views\index.jade:66
+    64|                         li
+    65|                             div
+  > 66|                                 a(way="")span(class="") 测试
+    67| 
+    68|         div(id="mainPanle" region="center" style="background: #f3f3f3; overflow-y:hidden;")
+    69|             div(id="tabs" class="easyui-tabs" fit="true"  border="false" style="height: 100%;")
+
+Unexpected token `tag` expected `text`, `code`, `:`, `newline` or `eos`
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:828:15)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+[2016-01-30 17:50:46.613] [ERROR] log_file - Error: d:\PROJECTS\xiaobaiju\background\views\index.jade:38
+    36|                         li
+    37|                             div
+  > 38|                                 a(way="")span(class="") 测试
+    39| 
+    40|         div(id="mainPanle" region="center" style="background: #f3f3f3; overflow-y:hidden;")
+    41|             div(id="tabs" class="easyui-tabs" fit="true"  border="false" style="height: 100%;")
+
+Unexpected token `tag` expected `text`, `code`, `:`, `newline` or `eos`
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:828:15)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (d:\PROJECTS\xiaobaiju\background\node_modules\jade\lib\parser.js:729:25)
+[2016-01-31 10:07:44.595] [ERROR] log_file - TypeError: Cannot read property 'find' of undefined
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:88:25
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at param (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:349:14)
+[2016-01-31 10:07:45.689] [ERROR] log_file - TypeError: Cannot read property 'find' of undefined
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:88:25
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at param (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:349:14)
+[2016-01-31 10:08:01.454] [ERROR] log_file - TypeError: Admin is not a function
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:25:14
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at param (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:349:14)
+[2016-01-31 14:09:20.013] [ERROR] log_file - TypeError: Cannot read property 'user' of undefined
+    at authentication (d:\PROJECTS\xiaobaiju\background\js\routes\index.js:15:21)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\index.js:6:5
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at Function.handle (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:176:3)
+    at router (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:46:12)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+[2016-01-31 14:19:20.561] [ERROR] log_file - TypeError: Cannot read property 'user' of undefined
+    at authentication (d:\PROJECTS\xiaobaiju\background\js\routes\index.js:15:21)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\index.js:6:5
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at Function.handle (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:176:3)
+    at router (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:46:12)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+[2016-01-31 15:05:14.563] [ERROR] log_file - ReferenceError: alert is not defined
+    at authentication (d:\PROJECTS\xiaobaiju\background\js\routes\index.js:15:5)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\index.js:6:5
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at Function.handle (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:176:3)
+    at router (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:46:12)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+[2016-01-31 17:32:00.956] [ERROR] log_file - Error: Not Found
+    at d:\PROJECTS\xiaobaiju\background\app.js:99:15
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at d:\PROJECTS\xiaobaiju\background\app.js:65:5
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at Domain.<anonymous> (d:\PROJECTS\xiaobaiju\background\node_modules\express-domain-middleware\index.js:9:5)
+    at Domain.run (domain.js:228:14)
+    at module.exports (d:\PROJECTS\xiaobaiju\background\node_modules\express-domain-middleware\index.js:8:10)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+[2016-01-31 17:32:31.773] [ERROR] log_file - Error: Not Found
+    at d:\PROJECTS\xiaobaiju\background\app.js:99:15
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at d:\PROJECTS\xiaobaiju\background\app.js:65:5
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at Domain.<anonymous> (d:\PROJECTS\xiaobaiju\background\node_modules\express-domain-middleware\index.js:9:5)
+    at Domain.run (domain.js:228:14)
+    at module.exports (d:\PROJECTS\xiaobaiju\background\node_modules\express-domain-middleware\index.js:8:10)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+[2016-02-01 12:44:29.584] [ERROR] log_file - TypeError: Cannot read property 'body' of undefined
+    at Object.module.exports.searchByCondition (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:16)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:71:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:20:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 12:44:33.470] [ERROR] log_file - TypeError: Cannot read property 'body' of undefined
+    at Object.module.exports.searchByCondition (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:16)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:71:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin.js:20:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:28:28.811] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:28:32.478] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:37:14.054] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:40:34.237] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:40:35.519] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:40:35.819] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:40:36.007] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:40:36.465] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:40:36.895] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:40:37.332] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:11:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:24:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 15:43:17.952] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:12:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:25:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 16:06:17.397] [ERROR] log_file - ReferenceError: req is not defined
+    at Object.module.exports.login (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:12:22)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:25:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 16:09:51.827] [ERROR] log_file - ReferenceError: _ is not defined
+    at Object.module.exports.create (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:31:9)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:29:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 16:09:53.865] [ERROR] log_file - ReferenceError: _ is not defined
+    at Object.module.exports.create (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:31:9)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:29:18
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 16:14:57.222] [ERROR] log_file - ReferenceError: next is not defined
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:44:39
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\admin.js:19:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at param (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:349:14)
+[2016-02-01 16:36:44.275] [ERROR] log_file - ReferenceError: next is not defined
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:41:38
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:20:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at param (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:349:14)
+[2016-02-01 16:37:42.848] [ERROR] log_file - ReferenceError: param is not defined
+    at Object.module.exports.update (d:\PROJECTS\xiaobaiju\background\js\service\userService.js:34:45)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:36:17
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:20:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 16:37:45.412] [ERROR] log_file - ReferenceError: param is not defined
+    at Object.module.exports.update (d:\PROJECTS\xiaobaiju\background\js\service\userService.js:34:45)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:36:17
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:20:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-01 16:41:04.255] [ERROR] log_file - ReferenceError: param is not defined
+    at Object.module.exports.update (d:\PROJECTS\xiaobaiju\background\js\service\userService.js:35:45)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:37:17
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:121:14)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\api\user.js:20:2
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+[2016-02-02 15:55:27.429] [ERROR] log_file - TypeError: Cannot set property 'user' of undefined
+    at Query.<anonymous> (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:21:34)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:177:19
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:109:16
+    at nextTickCallbackWith0Args (node.js:433:9)
+    at process._tickDomainCallback (node.js:403:13)
+[2016-02-02 15:55:29.673] [ERROR] log_file - TypeError: Cannot set property 'user' of undefined
+    at Query.<anonymous> (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:21:34)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:177:19
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:109:16
+    at nextTickCallbackWith0Args (node.js:433:9)
+    at process._tickDomainCallback (node.js:403:13)
+[2016-02-02 15:55:30.978] [ERROR] log_file - TypeError: Cannot set property 'user' of undefined
+    at Query.<anonymous> (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:21:34)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:177:19
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:109:16
+    at nextTickCallbackWith0Args (node.js:433:9)
+    at process._tickDomainCallback (node.js:403:13)
+[2016-02-02 15:55:31.171] [ERROR] log_file - TypeError: Cannot set property 'user' of undefined
+    at Query.<anonymous> (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:21:34)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:177:19
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:109:16
+    at nextTickCallbackWith0Args (node.js:433:9)
+    at process._tickDomainCallback (node.js:403:13)
+[2016-02-02 15:55:31.828] [ERROR] log_file - TypeError: Cannot set property 'user' of undefined
+    at Query.<anonymous> (d:\PROJECTS\xiaobaiju\background\js\service\adminService.js:21:34)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:177:19
+    at d:\PROJECTS\xiaobaiju\background\node_modules\kareem\index.js:109:16
+    at nextTickCallbackWith0Args (node.js:433:9)
+    at process._tickDomainCallback (node.js:403:13)
+[2016-03-11 16:13:26.639] [ERROR] log_file - TypeError: Cannot read property '0' of undefined
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin\index.js:20:52
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:277:22
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at d:\PROJECTS\xiaobaiju\background\js\routes\admin\index.js:15:5
+    at Layer.handle [as handle_request] (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:312:13)
+    at d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:280:7
+    at Function.process_params (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:330:12)
+    at next (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:271:10)
+    at Function.handle (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:176:3)
+    at router (d:\PROJECTS\xiaobaiju\background\node_modules\express\lib\router\index.js:46:12)
