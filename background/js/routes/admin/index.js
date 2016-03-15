@@ -36,5 +36,9 @@ router.get('/login', function (req, res, next) {
     res.render('login');
 });
 
+router.get('/templateMgmt',function(req,res) {
+    res.render('templateMgmt');
+})
+
 module.exports = router;
 

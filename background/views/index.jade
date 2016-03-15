@@ -122,7 +122,11 @@ html
                             div
                                 a(way="/admin/userMgmt" onclick="clickMenu(this)"
                                 onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") <span class="icon icon-nav" ></span> 用户管理
-
+                    ul
+                        li
+                            div
+                                a(way="/admin/templateMgmt" onclick="clickMenu(this)"
+                                        onmouseover="mouseOverMenu(this)" onmouseout="mouseOutMenu(this)") <span class="icon icon-nav" ></span> template管理
         div(id="mainPanle" region="center" style="background: #f3f3f3; overflow-y:hidden;")
             div(id="tabs" class="easyui-tabs" fit="true"  border="false" style="height: 100%;")
                 div(title="欢迎使用" style="padding:20px;overflow:hidden;" id="home")
