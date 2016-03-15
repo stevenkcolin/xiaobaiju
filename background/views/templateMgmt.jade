@@ -12,7 +12,7 @@ html
             $(document).ready(function () {
                 $('#dg').datagrid(
                         {
-                            url: "/api/user/searchByCondition",
+                            url: "http://www.stevenkcolin.com:3000/api/template/published",
                             method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
@@ -22,12 +22,10 @@ html
                             collapsible: true,
                             remoteSort: true,
                             height: 500,
-                            columns: [[
-                                {field: 'rowId', title: 'rowId', checkbox: true},
+                            columns: [
                                 {field: '_id', title: 'id'},
-                                {field: 'name', title: '姓名', width: 100},
-                                {field: 'loginFrom', title: '登录于', width: 100}
-                            ]]
+                                {field: 'name', title: 'TemplateName', width: 100},
+                            ]
                         });
             });
 
@@ -187,7 +185,7 @@ html
                 });
             }
     body
-        table(id="dg" title="用户信息"  width="100%"
+        table(id="dg" title="Template管理"  width="100%"
         style="height: 100%;" data-options="fit:true" )
             //thread
                 tr
@@ -198,17 +196,17 @@ html
         div(id="toolbar")
             table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
                 tr
-                    td(align="left" width="200px") Name
-                        input(class="easyui-textbox" type="text"
-                        name="name_search" id="name_search")
-                    td(align="left" width="200px") LoginFrom
-                        input(class="easyui-textbox" type="text"
-                        name="loginFrom_search" id="loginFrom_search")
+                    //td(align="left" width="200px") Name
+                    //    input(class="easyui-textbox" type="text"
+                    //    name="name_search" id="name_search")
+                    //td(align="left" width="200px") LoginFrom
+                    //    input(class="easyui-textbox" type="text"
+                    //    name="loginFrom_search" id="loginFrom_search")
                 tr
-                    td
-                        a(id="searchBtn" href="javascript:void(0)"
-                        class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
-                        onclick="searchUser()") 查询
+                    //td
+                    //    a(id="searchBtn" href="javascript:void(0)"
+                    //    class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
+                    //    onclick="searchUser()") 查询
             a(id="save" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
             iconcls="icon-add" plain="true" onclick="newUser()") 新增
             a(id="delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
