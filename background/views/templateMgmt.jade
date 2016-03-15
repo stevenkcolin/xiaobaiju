@@ -12,7 +12,13 @@ html
             $(document).ready(function () {
                 $('#dg').datagrid(
                         {
-                            url: "http://www.stevenkcolin.com:3000/api/template/published",
+                            loadFilter: function (data) {
+                                return {
+                                    total:data.result.length,
+                                    rows:data.result
+                                };
+                            },
+                            url: "/api/template/published",
                             method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
