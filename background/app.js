@@ -13,6 +13,7 @@ var admin = require("./js/routes/api/admin");
 var user = require("./js/routes/api/user");
 var task = require("./js/routes/api/task");
 var template = require("./js/routes/api/template");
+var attachment = require("./js/routes/api/attachment");
 var actionType = require("./js/routes/api/actionType");
 var reportInfo = require("./js/routes/api/reportInfo");
 var sqldbConfig = require("./js/config/sqlDB.json");
@@ -71,6 +72,9 @@ app.use("/api/template",template);
 
 // template routers for "/actiontype" url
 app.use("/api/actiontype",actionType);
+
+// attachment routers for "/attachment" url
+app.use("/api/attachment", attachment);
 
 // template routers for "/reportInfo" url
 app.use("/api/reportInfo", reportInfo);
