@@ -29,8 +29,11 @@ html
                             remoteSort: true,
                             height: 500,
                             columns: [[
+                                {field: 'rowId', title: 'rowId', checkbox: true},
                                 {field: '_id', title: 'id'},
-                                {field: 'name', title: 'TemplateName', width: 100}
+                                {field: 'name', title: 'TemplateName'},
+                                {field: 'status',title:'状态'},
+                                {field: 'background',title:'背景'}
                             ]]
                         });
             });
@@ -50,12 +53,12 @@ html
 
             }
 
-            function newUser() {
-                $('#dlg').dialog('open').dialog('setTitle', '创建新用户');
+            function newTemplate() {
+                $('#dlg').dialog('open').dialog('setTitle', '创建新Template');
                 $("#method").val("create");
             }
 
-            function editUser() {
+            function editTemplate() {
                 var row = $('#dg').datagrid('getChecked');
                 if (row.length === 0) {
                     $.messager.alert('提示信息', '请选择一条数据........');
@@ -68,30 +71,22 @@ html
                 $.ajax({
                     cache: true,
                     type: 'get',
-                    url: '/api/user/searchById',
-                    data: {
-                        userId: row[0]._id.toString()
-                    },
+                    url: '/api/template/detail?id='+row[0]._id.toString(),
                     async: false,
                     error: function (data) {
                         $.messager.alert('提示信息', '操作失败!');
                     },
                     success: function (data) {
                         // var res = eval('(' + data.result[0] + ')');
-                        var res = data.result[0];
+                        var res = data.result;
                         if (res) {
                             $("#id_createOrEdit").val(res._id);
                             $("#name_createOrEdit").textbox(
                                     "setValue", res.name);
-                            $("#loginAccount_createOrEdit").textbox(
-                                    "setValue", res.loginAccount);
-                            $("#loginFrom_createOrEdit").textbox(
-                                    "setValue", res.loginFrom);
-                            $("#password_createOrEdit").textbox(
-                                    "setValue", res.password);
-                            $("#phone_createOrEdit").textbox(
-                                    "setValue", res.phone);
-
+                            $("#background_createOrEdit").textbox(
+                                    "setValue", res.background);
+                            $("#status_createOrEdit").textbox(
+                                    "setValue", res.status);
                             $("#method").val("update");
                             $('#dlg').dialog('open').dialog('setTitle',
                                     '编辑');
@@ -110,7 +105,7 @@ html
                 for (var i = 0; i < row.length; i++) {
                     userIds.push(row[i]._id);
                 }
-                $.messager
+                /*$.messager
                         .confirm(
                                 '确认',
                                 '确定删除用户吗？',
@@ -119,7 +114,7 @@ html
                                         $.ajax({
                                             cache: true,
                                             type: 'post',
-                                            url: '/api/user/delete',
+                                            url: '/api/template/delete',
                                             data: {
                                                 userIds: userIds.toString()
                                             },
@@ -141,27 +136,30 @@ html
                                             }
                                         });
                                     }
-                                });
+                                });*/
 
             }
 
             function closeDlg() {
-                //$("#method").val("modify");
                 $('#dlg').dialog('close');
             }
 
             function save() {
                 var _id = $("#id_createOrEdit").val();
                 var name = $.trim($("#name_createOrEdit").val());
-                var loginAccount = $.trim($("#loginAccount_createOrEdit").val());
-                var loginFrom = $.trim($("#loginFrom_createOrEdit").val());
-                var password = $.trim($("#password_createOrEdit").val());
-                var phone = $.trim($("#phone_createOrEdit").val());
-                var urlPost = "";
+                var background = $.trim($("#background_createOrEdit").val());
+                var status = $.trim($("#status_createOrEdit").val());
+
+                alert(_id)
+                alert(name)
+                alert(background);
+                alert(status);
+
+                /*var urlPost = "";
                 if ($("#method").val() === "create") {
-                    urlPost = "/api/user/create";
-                }
-                if ($("#method").val() === "update") urlPost = "/api/user/update";
+                    urlPost = "/api/template/create";
+                }*/
+                /*if ($("#method").val() === "update") urlPost = "/api/template/update";
 
                 $.ajax({
                     type: 'POST',
@@ -170,10 +168,8 @@ html
                     data: {
                         userId: _id,
                         name: name,
-                        loginAccount: loginAccount,
-                        loginFrom: loginFrom,
-                        password: password,
-                        phone: phone
+                        background: background,
+                        status: status
                     },
 
                     success: function (data) {
@@ -188,17 +184,11 @@ html
                     error: function (data) {
                         $.messager.alert('提示信息', data.message);
                     }
-                });
+                });*/
             }
     body
         table(id="dg" title="Template管理"  width="100%"
         style="height: 100%;" data-options="fit:true" )
-            //thread
-                tr
-                    //th(field="id" checkbox="true")
-                    th(data-options="field:'name',width:80") 姓名
-                    th(data-options="field:'age',width:80") 年龄
-
         div(id="toolbar")
             table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
                 tr
@@ -214,40 +204,31 @@ html
                     //    class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
                     //    onclick="searchUser()") 查询
             a(id="save" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
-            iconcls="icon-add" plain="true" onclick="newUser()") 新增
+            iconcls="icon-add" plain="true" onclick="newTemplate()") 新增
             a(id="delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
             iconcls="icon-remove" plain="true" onclick="deleteUser()") 删除
             a(id="update" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
-            iconcls="icon-edit" plain="true" onclick="editUser()") 修改
+            iconcls="icon-edit" plain="true" onclick="editTemplate()") 修改
 
         form(id="createOrEdit" method="post")
             div(id="dlg" class="easyui-dialog"
             data-options="closable:false,modal:true"
             style="width: 600px; height: 300px; padding: 10px 20px; position: relative;"
             closed="true" buttons="#dlg-buttons")
-                div(class="ftitle") 用户信息
+                div(class="ftitle") Template信息
                 input(id="id_createOrEdit" type="hidden" )
                 div(class="fitem")
-                    label 姓名:
+                    label TemplateName:
                     input(id="name_createOrEdit" type="text" class="easyui-textbox")
                     span(style="color: red;") *
                 div(class="fitem")
-                    label 账号:
-                    input(id="loginAccount_createOrEdit" type="text" class="easyui-textbox")
+                    label Background:
+                    input(id="background_createOrEdit" type="text" class="easyui-textbox")
                     span(style="color: red;") *
                 div(class="fitem")
-                    label 登录于:
-                    input(id="loginFrom_createOrEdit" type="text" class="easyui-textbox")
+                    label Status:
+                    input(id="status_createOrEdit" type="text" class="easyui-textbox")
                     span(style="color: red;") *
-                div(class="fitem")
-                    label 密码:
-                    input(id="password_createOrEdit" type="text" class="easyui-textbox")
-                    span(style="color: red;") *
-                div(class="fitem")
-                    label 电话:
-                    input(id="phone_createOrEdit" type="text" class="easyui-textbox")
-                    span(style="color: red;") *
-
         div(id="dlg-buttons")
             a(href="javascript:void(0)" class="easyui-linkbutton c6"
             iconcls="icon-ok" onclick="save();" style="width: 90px") 保存
