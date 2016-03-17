@@ -40,5 +40,9 @@ router.get('/templateMgmt',function(req,res) {
     res.render('templateMgmt');
 })
 
+router.get('/actiontypeMgmt',function(req,res){
+    res.render('actiontypeMgmt');
+})
+
 module.exports = router;
 
