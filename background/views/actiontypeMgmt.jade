@@ -18,7 +18,7 @@ html
                                     rows:data.result
                                 };
                             },
-                            url: "/api/template/published",
+                            url: "/api/actiontype/",
                             method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
@@ -31,16 +31,15 @@ html
                             columns: [[
                                 {field: 'rowId', title: 'rowId', checkbox: true},
                                 {field: '_id', title: 'id'},
-                                {field: 'name', title: 'TemplateName'},
-                                {field: 'status',title:'状态'},
-                                {field: 'background',title:'背景'}
+                                {field: 'name', title: 'ActionType Name'},
+                                {field: 'postLimit',title:'Post Limit'}
                             ]]
                         });
             });
 
 
 
-            function searchUser() {
+            /*function searchUser() {
                 var name = $("#name_search").val();
                 var loginFrom = $("#loginFrom_search").val();
                 // $('#dg').datagrid({
@@ -51,10 +50,10 @@ html
                     loginFrom: loginFrom
                 });
 
-            }
+            }*/
 
             function newTemplate() {
-                $('#dlg').dialog('open').dialog('setTitle', '创建新Template');
+                $('#dlg').dialog('open').dialog('setTitle', '创建新ActionType');
                 $("#method").val("create");
             }
 
@@ -71,7 +70,7 @@ html
                 $.ajax({
                     cache: true,
                     type: 'get',
-                    url: '/api/template/detail?id='+row[0]._id.toString(),
+                    url: '/api/actiontype/'+row[0]._id.toString(),
                     async: false,
                     error: function (data) {
                         $.messager.alert('提示信息', '操作失败!');
@@ -83,10 +82,8 @@ html
                             $("#id_createOrEdit").val(res._id);
                             $("#name_createOrEdit").textbox(
                                     "setValue", res.name);
-                            $("#background_createOrEdit").textbox(
-                                    "setValue", res.background);
-                            $("#status_createOrEdit").textbox(
-                                    "setValue", res.status);
+                            $("#postLimit_createOrEdit").textbox(
+                                    "setValue", res.postLimit);
                             $("#method").val("update");
                             $('#dlg').dialog('open').dialog('setTitle',
                                     '编辑');
@@ -101,11 +98,15 @@ html
                     $.messager.alert('提示信息', '请选择一条数据........');
                     return;
                 }
+                if (row.length > 1) {
+                    $.messager.alert('提示信息', '只能选择一条删除.......');
+                    return;
+                }
                 var userIds = new Array();
                 for (var i = 0; i < row.length; i++) {
                     userIds.push(row[i]._id);
                 }
-                /*$.messager
+                $.messager
                         .confirm(
                                 '确认',
                                 '确定删除用户吗？',
@@ -113,11 +114,8 @@ html
                                     if (r) {
                                         $.ajax({
                                             cache: true,
-                                            type: 'post',
-                                            url: '/api/template/delete',
-                                            data: {
-                                                userIds: userIds.toString()
-                                            },
+                                            type: 'delete',
+                                            url: '/api/actiontype/'+userIds,
                                             async: false,
                                             error: function (data) {
                                                 $.messager.alert('提示信息',
@@ -128,7 +126,7 @@ html
                                                     $('#dg')
                                                             .datagrid(
                                                                     'reload',
-                                                                    '/api/user/searchByCondition');
+                                                                    '/api/actiontype/');
                                                 }
                                                 //$("#method").val("modify");
                                                 $.messager.alert('提示信息',
@@ -136,7 +134,7 @@ html
                                             }
                                         });
                                     }
-                                });*/
+                                });
 
             }
 
@@ -147,33 +145,33 @@ html
             function save() {
                 var _id = $("#id_createOrEdit").val();
                 var name = $.trim($("#name_createOrEdit").val());
-                var background = $.trim($("#background_createOrEdit").val());
-                var status = $.trim($("#status_createOrEdit").val());
+                var postLimit = $.trim($("#postLimit_createOrEdit").val());
 
-                alert(_id)
-                alert(name)
-                alert(background);
-                alert(status);
-
-                /*var urlPost = "";
+                var urlPost = "";
+                var jsondata = "";
                 if ($("#method").val() === "create") {
-                    urlPost = "/api/template/create";
-                }*/
-                /*if ($("#method").val() === "update") urlPost = "/api/template/update";
+                    urlPost = "/api/actiontype/create";
+                    jsondata = {
+                        name : name,
+                        postLimit : postLimit
+                    };
+                };
+
+                if ($("#method").val() === "update") {
+                    urlPost = "/api/actiontype/update/"+_id;
+                    jsondata = {
+                        _id : _id,
+                        name : name,
+                        postLimit : postLimit
+                    };
+                };
 
                 $.ajax({
                     type: 'POST',
                     url: urlPost,
                     dataType: "json",
-                    data: {
-                        userId: _id,
-                        name: name,
-                        background: background,
-                        status: status
-                    },
-
+                    data: jsondata,
                     success: function (data) {
-
                         if (data.status == "success") {
                             $('#dg').datagrid('reload');
                             $('#dlg').dialog('close');
@@ -184,13 +182,13 @@ html
                     error: function (data) {
                         $.messager.alert('提示信息', data.message);
                     }
-                });*/
+                });
             }
     body
         table(id="dg" title="Action Type管理"  width="100%"
         style="height: 100%;" data-options="fit:true" )
         div(id="toolbar")
-            table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
+            //table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
                 tr
                     //td(align="left" width="200px") Name
                     //    input(class="easyui-textbox" type="text"
@@ -218,16 +216,12 @@ html
                 div(class="ftitle") Template信息
                 input(id="id_createOrEdit" type="hidden" )
                 div(class="fitem")
-                    label TemplateName:
+                    label ActionType Name:
                     input(id="name_createOrEdit" type="text" class="easyui-textbox")
                     span(style="color: red;") *
                 div(class="fitem")
-                    label Background:
-                    input(id="background_createOrEdit" type="text" class="easyui-textbox")
-                    span(style="color: red;") *
-                div(class="fitem")
-                    label Status:
-                    input(id="status_createOrEdit" type="text" class="easyui-textbox")
+                    label PostLimit:
+                    input(id="postLimit_createOrEdit" type="text" class="easyui-textbox")
                     span(style="color: red;") *
         div(id="dlg-buttons")
             a(href="javascript:void(0)" class="easyui-linkbutton c6"

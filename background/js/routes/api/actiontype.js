@@ -29,21 +29,35 @@ router.get("/", function(req, res, next) {
 
 // create a ActionType
 router.post("/create", function(req, res) {
-    //todo:新增一个ActionType
-    //todo:这个ActionType还带着PostLimit字段
+    var actiontype = new ActionType();
+    _.extend(actiontype, req.body);
+    //task.createDate = new Date();
+    actiontype.save(function(err){
+        if (err) throw err;
+        successHandler.handle(null, res);
+    });
 });
 
 // update a ActionType
 router.post("/update/:id", function(req, res) {
     var id = req.params.id;
-    //todo:修改一个ActionType
-    //todo:这个ActionType还带着PostLimit字段
+    ActionType.update({_id: id}, {$set: req.body}, function(err, doc) {
+        if (err) throw err;
+        var result = {count: doc.n};
+        successHandler.handle(result, res);
+    });
+
 });
 
 // delete a ActionType
 router.delete("/:id", function(req, res) {
     var id = req.params.id;
     //todo: 删除一个ActioinType
+    ActionType.remove({_id: id}, function(err, doc) {
+        if (err) throw err;
+        var result = {count: doc.result.n};
+        successHandler.handle(result, res);
+    });
 });
 
 // find ActionType by parameter
@@ -55,7 +69,10 @@ router.get("/find", function(req, res) {
 // get a ActionType by id
 router.get("/:id", function(req, res) {
     var id = req.params.id;
-    //todo: 根据Id找一个ActionType
+    ActionType.findById(id, function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
 });
 
 module.exports = router;
