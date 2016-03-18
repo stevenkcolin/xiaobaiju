@@ -20,6 +20,25 @@ router.all("*", function(req, res, next) {
     next();
 });
 
+// get all ActionType
+router.get("/", function(req, res, next) {
+    Template.find(function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
+});
+
+// create a ActionType
+router.post("/create", function(req, res) {
+    var template = new Template();
+    _.extend(template, req.body);
+    //task.createDate = new Date();
+    template.save(function(err){
+        if (err) throw err;
+        successHandler.handle(null, res);
+    });
+});
+
 // get all template
 router.get("/published", function(req, res, next) {
     Template.find({status: constant.TEMPLATE_STATUS_PUBLISHED}, {name:1, background:1}, function(err, doc) {
@@ -70,6 +89,27 @@ router.get("/actionType", function(req, res, next) {
         if (err) throw err;
         successHandler.handle(doc, res);
     })
+});
+
+// update a Template
+router.post("/update/:id", function(req, res) {
+    var id = req.params.id;
+    Template.update({_id: id}, {$set: req.body}, function(err, doc) {
+        if (err) throw err;
+        var result = {count: doc.n};
+        successHandler.handle(result, res);
+    });
+
+});
+
+// delete a Template
+router.delete("/:id", function(req, res) {
+    var id = req.params.id;
+    Template.remove({_id: id}, function(err, doc) {
+        if (err) throw err;
+        var result = {count: doc.result.n};
+        successHandler.handle(result, res);
+    });
 });
 
 module.exports = router;

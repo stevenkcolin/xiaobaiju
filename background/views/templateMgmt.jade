@@ -18,7 +18,7 @@ html
                                     rows:data.result
                                 };
                             },
-                            url: "/api/template/published",
+                            url: "/api/template/",
                             method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
@@ -101,11 +101,15 @@ html
                     $.messager.alert('提示信息', '请选择一条数据........');
                     return;
                 }
+                if (row.length > 1) {
+                    $.messager.alert('提示信息', '只能选择一条删除.......');
+                    return;
+                }
                 var userIds = new Array();
                 for (var i = 0; i < row.length; i++) {
                     userIds.push(row[i]._id);
                 }
-                /*$.messager
+                $.messager
                         .confirm(
                                 '确认',
                                 '确定删除用户吗？',
@@ -113,11 +117,8 @@ html
                                     if (r) {
                                         $.ajax({
                                             cache: true,
-                                            type: 'post',
-                                            url: '/api/template/delete',
-                                            data: {
-                                                userIds: userIds.toString()
-                                            },
+                                            type: 'delete',
+                                            url: '/api/template/'+userIds,
                                             async: false,
                                             error: function (data) {
                                                 $.messager.alert('提示信息',
@@ -128,7 +129,7 @@ html
                                                     $('#dg')
                                                             .datagrid(
                                                                     'reload',
-                                                                    '/api/user/searchByCondition');
+                                                                    '/api/template/');
                                                 }
                                                 //$("#method").val("modify");
                                                 $.messager.alert('提示信息',
@@ -136,7 +137,7 @@ html
                                             }
                                         });
                                     }
-                                });*/
+                                });
 
             }
 
@@ -149,24 +150,17 @@ html
                 var name = $.trim($("#name_createOrEdit").val());
                 var background = $.trim($("#background_createOrEdit").val());
                 var status = $.trim($("#status_createOrEdit").val());
-
-                alert(_id)
-                alert(name)
-                alert(background);
-                alert(status);
-
-                /*var urlPost = "";
+                var urlPost = "";
                 if ($("#method").val() === "create") {
                     urlPost = "/api/template/create";
-                }*/
-                /*if ($("#method").val() === "update") urlPost = "/api/template/update";
+                }
+                if ($("#method").val() === "update") urlPost = "/api/template/update/"+_id;
 
                 $.ajax({
                     type: 'POST',
                     url: urlPost,
                     dataType: "json",
                     data: {
-                        userId: _id,
                         name: name,
                         background: background,
                         status: status
@@ -184,25 +178,25 @@ html
                     error: function (data) {
                         $.messager.alert('提示信息', data.message);
                     }
-                });*/
+                });
             }
     body
         table(id="dg" title="Template管理"  width="100%"
         style="height: 100%;" data-options="fit:true" )
         div(id="toolbar")
-            table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
-                tr
-                    //td(align="left" width="200px") Name
-                    //    input(class="easyui-textbox" type="text"
-                    //    name="name_search" id="name_search")
-                    //td(align="left" width="200px") LoginFrom
-                    //    input(class="easyui-textbox" type="text"
-                    //    name="loginFrom_search" id="loginFrom_search")
-                tr
-                    //td
-                    //    a(id="searchBtn" href="javascript:void(0)"
-                    //    class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
-                    //    onclick="searchUser()") 查询
+            //table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
+            //    tr
+            //        //td(align="left" width="200px") Name
+            //        //    input(class="easyui-textbox" type="text"
+            //        //    name="name_search" id="name_search")
+            //        //td(align="left" width="200px") LoginFrom
+            //        //    input(class="easyui-textbox" type="text"
+            //        //    name="loginFrom_search" id="loginFrom_search")
+            //    tr
+            //        //td
+            //        //    a(id="searchBtn" href="javascript:void(0)"
+            //        //    class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
+            //        //    onclick="searchUser()") 查询
             a(id="save" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
             iconcls="icon-add" plain="true" onclick="newTemplate()") 新增
             a(id="delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"

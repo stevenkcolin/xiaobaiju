@@ -52,7 +52,6 @@ router.post("/update/:id", function(req, res) {
 // delete a ActionType
 router.delete("/:id", function(req, res) {
     var id = req.params.id;
-    //todo: 删除一个ActioinType
     ActionType.remove({_id: id}, function(err, doc) {
         if (err) throw err;
         var result = {count: doc.result.n};
