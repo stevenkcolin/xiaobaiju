@@ -31,9 +31,10 @@ html
                             columns: [[
                                 {field: 'rowId', title: 'rowId', checkbox: true},
                                 {field: '_id', title: 'id'},
-                                {field: 'name', title: 'TemplateName'},
-                                {field: 'status',title:'状态'},
-                                {field: 'background',title:'背景'}
+                                {field: 'name', title: 'TemplateName', sortable: true},
+                                {field: 'status',title:'状态',editor:'text',sortable: true},
+                                {field: 'background',title:'背景',editor:'text'},
+                                {field: 'actionTypeList', title:'actionTypeList'}
                             ]]
                         });
             });
@@ -71,7 +72,7 @@ html
                 $.ajax({
                     cache: true,
                     type: 'get',
-                    url: '/api/template/detail?id='+row[0]._id.toString(),
+                    url: '/api/template/'+row[0]._id.toString(),
                     async: false,
                     error: function (data) {
                         $.messager.alert('提示信息', '操作失败!');
@@ -87,6 +88,8 @@ html
                                     "setValue", res.background);
                             $("#status_createOrEdit").textbox(
                                     "setValue", res.status);
+                            $("#ActionTypeList_creatOrEdit").textbox(
+                                    "setValue", res.actionTypeList);
                             $("#method").val("update");
                             $('#dlg').dialog('open').dialog('setTitle',
                                     '编辑');
@@ -150,12 +153,25 @@ html
                 var name = $.trim($("#name_createOrEdit").val());
                 var background = $.trim($("#background_createOrEdit").val());
                 var status = $.trim($("#status_createOrEdit").val());
+                var strAction = $.trim($("#ActionTypeList_creatOrEdit").val());
+
+
+                /*var actionTypeIds = "56ea65116170abc9107b8dea,56ea65c16170abc9107b8dec";
+                var tmp = actionTypeIds.split(',');
+                var arrParams = {};
+                tmp.forEach(function (str, index) {
+                    arrParams[index] = str;
+                });*/
+
+                var test = {};
+                test[0] = "56ea65116170abc9107b8dea";
+                test[1] = "56ea65c16170abc9107b8dec";
+
                 var urlPost = "";
                 if ($("#method").val() === "create") {
                     urlPost = "/api/template/create";
                 }
                 if ($("#method").val() === "update") urlPost = "/api/template/update/"+_id;
-
                 $.ajax({
                     type: 'POST',
                     url: urlPost,
@@ -163,7 +179,8 @@ html
                     data: {
                         name: name,
                         background: background,
-                        status: status
+                        status: status,
+                        actionTypeList : test
                     },
 
                     success: function (data) {
@@ -182,7 +199,7 @@ html
             }
     body
         table(id="dg" title="Template管理"  width="100%"
-        style="height: 100%;" data-options="fit:true" )
+        style="height: 50%;" data-options="fit:true" )
         div(id="toolbar")
             //table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
             //    tr
@@ -213,16 +230,22 @@ html
                 input(id="id_createOrEdit" type="hidden" )
                 div(class="fitem")
                     label TemplateName:
-                    input(id="name_createOrEdit" type="text" class="easyui-textbox")
+                    input(id="name_createOrEdit" type="text" class="easyui-textbox" size="40")
                     span(style="color: red;") *
                 div(class="fitem")
                     label Background:
-                    input(id="background_createOrEdit" type="text" class="easyui-textbox")
+                    input(id="background_createOrEdit" type="text" class="easyui-textbox" size="70")
                     span(style="color: red;") *
                 div(class="fitem")
                     label Status:
-                    input(id="status_createOrEdit" type="text" class="easyui-textbox")
+                    input(id="status_createOrEdit" type="text" class="easyui-textbox" size="70")
                     span(style="color: red;") *
+                div(class="fitem")
+                    label Action Type List:
+                    input(id="ActionTypeList_creatOrEdit" type="text" class="easyui-textbox" size="70")
+                    span(style="color: red;") *
+
+
         div(id="dlg-buttons")
             a(href="javascript:void(0)" class="easyui-linkbutton c6"
             iconcls="icon-ok" onclick="save();" style="width: 90px") 保存
@@ -230,6 +253,7 @@ html
             iconcls="icon-cancel" onclick="closeDlg();" style="width: 90px") 关闭
         input(type="hidden" id="method" name="method" value="update")
 
+        table(id="dg2" title="test001" width ="100%" style="height: 50%;" data-options="fit:true")
 
 
 

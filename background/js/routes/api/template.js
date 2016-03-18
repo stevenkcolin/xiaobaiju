@@ -112,4 +112,13 @@ router.delete("/:id", function(req, res) {
     });
 });
 
+// get a ActionType by id
+router.get("/:id", function(req, res) {
+    var id = req.params.id;
+    Template.findById(id, function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
+});
+
 module.exports = router;
