@@ -20,6 +20,14 @@ router.all("*", function(req, res, next) {
 	next();
 });
 
+// get all Users
+router.get("/", function(req, res, next) {
+    User.find(function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
+});
+
 
 // create a user
 router.post("/create", function(req, res, next) {

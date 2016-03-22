@@ -16,6 +16,7 @@ var template = require("./js/routes/api/template");
 var attachment = require("./js/routes/api/attachment");
 var actionType = require("./js/routes/api/actionType");
 var reportInfo = require("./js/routes/api/reportInfo");
+var postActions = require("./js/routes/api/postactions");
 var sqldbConfig = require("./js/config/sqlDB.json");
 var session = require('express-session');
 require("./js/common/dbUtils");
@@ -33,8 +34,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(session({
     secret: '12345',
-    name: 'testapp',   //ÕâÀïµÄnameÖµµÃÊÇcookieµÄname£¬Ä¬ÈÏcookieµÄnameÊÇ£ºconnect.sid
-    cookie: {maxAge: 1200000},  //ÉèÖÃmaxAgeÊÇ80000ms£¬¼´80sºósessionºÍÏàÓ¦µÄcookieÊ§Ð§¹ýÆÚ
+    name: 'testapp',   //ï¿½ï¿½ï¿½ï¿½ï¿½nameÖµï¿½ï¿½ï¿½ï¿½cookieï¿½ï¿½nameï¿½ï¿½Ä¬ï¿½ï¿½cookieï¿½ï¿½nameï¿½Ç£ï¿½connect.sid
+    cookie: {maxAge: 1200000},  //ï¿½ï¿½ï¿½ï¿½maxAgeï¿½ï¿½80000msï¿½ï¿½ï¿½ï¿½80sï¿½ï¿½sessionï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½cookieÊ§Ð§ï¿½ï¿½ï¿½ï¿½
     resave: false,
     saveUninitialized: true
 }));
@@ -46,14 +47,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("express-domain-middleware"));
 
 //db connection by using orm
-app.use(orm.express(sqldbConfig, {
-    define: function(db, models, next) {
-        var listModels = require("./js/models/sqlModel");
-        listModels(db, models);
-        console.log('Mysql connected to ' + sqldbConfig.protocol + "://" + sqldbConfig.host + "/" + sqldbConfig.database);
-        next();
-    }
-}));
+//app.use(orm.express(sqldbConfig, {
+//    define: function(db, models, next) {
+//        var listModels = require("./js/models/sqlModel");
+//        listModels(db, models);
+//        console.log('Mysql connected to ' + sqldbConfig.protocol + "://" + sqldbConfig.host + "/" + sqldbConfig.database);
+//        next();
+//    }
+//}));
 
 // Backend admin page
 app.use("/admin", adminIndex);
@@ -78,6 +79,9 @@ app.use("/api/attachment", attachment);
 
 // template routers for "/reportInfo" url
 app.use("/api/reportInfo", reportInfo);
+
+// postactions routers for "/postactions" url
+app.use("/api/postactions", postActions);
 
 //send response if success
 app.use(function(req, res) {

@@ -19,6 +19,12 @@ router.all("*", function(req, res, next) {
 // create a PostActions
 router.post("/create", function(req, res) {
     //todo: 添加一个PostActions,添加的时候需要考虑ActionType的PostLimit限制
+    var postactions = new PostActions();
+    _.extend(postactions, req.body);
+    postactions.save(function(err){
+        if (err) throw err;
+        successHandler.handle(null, res);
+    });
 });
 
 // update a PostActions
@@ -50,6 +56,10 @@ router.get("/ActionType/:id", function(req, res) {
 // get all PostActions
 router.get("/", function(req, res, next) {
     //todo: 获得所有PostActions
+    PostActions.find(function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
 });
 
 module.exports = router;
