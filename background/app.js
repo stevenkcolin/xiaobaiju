@@ -16,7 +16,7 @@ var template = require("./js/routes/api/template");
 var attachment = require("./js/routes/api/attachment");
 var actionType = require("./js/routes/api/actionType");
 var reportInfo = require("./js/routes/api/reportInfo");
-var postActions = require("./js/routes/api/postactions");
+var postActions = require("./js/routes/api/postActions");
 var sqldbConfig = require("./js/config/sqlDB.json");
 var session = require('express-session');
 require("./js/common/dbUtils");

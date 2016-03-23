@@ -3,7 +3,7 @@
  */
 var express = require("express");
 
-var models = require("../../models/sqlModel");
+var models = require("../../models/model");
 var successHandler = require("../../common/successHandler");
 var PostActions = models.POSTACTIONS;
 var transactionHandler = require("../../common/transactionHandler");
@@ -45,12 +45,18 @@ router.get("/find", function(req, res) {
 // get a PostActions by id
 router.get("/:id", function(req, res) {
     //todo: 获得一个PostAction by id
+    var id = req.params.id;
+    PostActions.findById(id, function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
 });
 
 // get PostActions by ActionTypeId
 router.get("/ActionType/:id", function(req, res) {
     //todo: 根据ActionTypeId 获得所有IsShared=true的PostActions
     //todo: 注意:这里要把已关注用户的PostActions排在较前
+
 });
 
 // get all PostActions

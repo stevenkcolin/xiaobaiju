@@ -27,6 +27,15 @@ router.get("/", function(req, res, next) {
     });
 });
 
+// get a ActionType by id
+router.get("/:id", function(req, res) {
+    var id = req.params.id;
+    ActionType.findById(id, function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
+});
+
 // create a ActionType
 router.post("/create", function(req, res) {
     var actiontype = new ActionType();
@@ -65,13 +74,6 @@ router.get("/find", function(req, res) {
     //todo: low priority
 });
 
-// get a ActionType by id
-router.get("/:id", function(req, res) {
-    var id = req.params.id;
-    ActionType.findById(id, function(err, doc) {
-        if (err) throw err;
-        successHandler.handle(doc, res);
-    });
-});
+
 
 module.exports = router;

@@ -20,7 +20,7 @@ router.all("*", function(req, res, next) {
     next();
 });
 
-// get all ActionType
+// get all Template
 router.get("/", function(req, res, next) {
     Template.find(function(err, doc) {
         if (err) throw err;
@@ -28,18 +28,7 @@ router.get("/", function(req, res, next) {
     });
 });
 
-// create a ActionType
-router.post("/create", function(req, res) {
-    var template = new Template();
-    _.extend(template, req.body);
-    //task.createDate = new Date();
-    template.save(function(err){
-        if (err) throw err;
-        successHandler.handle(null, res);
-    });
-});
-
-// get all template
+// get all published template
 router.get("/published", function(req, res, next) {
     Template.find({status: constant.TEMPLATE_STATUS_PUBLISHED}, {name:1, background:1}, function(err, doc) {
         if (err) throw err;
@@ -47,7 +36,16 @@ router.get("/published", function(req, res, next) {
     });
 });
 
-// get template by id
+// get a Template by id
+router.get("/:id", function(req, res) {
+    var id = req.params.id;
+    Template.findById(id, function(err, doc) {
+        if (err) throw err;
+        successHandler.handle(doc, res);
+    });
+});
+
+// get template detail by id
 router.get("/detail", function(req, res, next) {
     var id = req.query.id;
     var limit = req.query.limit;
@@ -76,19 +74,16 @@ router.get("/detail", function(req, res, next) {
     });
 });
 
-// get postActions
-router.get("/actionType", function(req, res, next) {
-    var id = req.query._id;
-    var postActionLimit = req.query.postActionLimit;
-    var commentLimit = req.query.commentLimit;
 
-    var postActionParam = {path: "actionTypeList",
-        select: {"name": 1}};
-
-    Template.findById(id).populate(postActionParam).exec(function(err, doc) {
+// create a Template
+router.post("/create", function(req, res) {
+    var template = new Template();
+    _.extend(template, req.body);
+    //task.createDate = new Date();
+    template.save(function(err){
         if (err) throw err;
-        successHandler.handle(doc, res);
-    })
+        successHandler.handle(null, res);
+    });
 });
 
 // update a Template
@@ -112,13 +107,21 @@ router.delete("/:id", function(req, res) {
     });
 });
 
-// get a ActionType by id
-router.get("/:id", function(req, res) {
-    var id = req.params.id;
-    Template.findById(id, function(err, doc) {
+// get postActions
+router.get("/actionType", function(req, res, next) {
+    var id = req.query._id;
+    var postActionLimit = req.query.postActionLimit;
+    var commentLimit = req.query.commentLimit;
+
+    var postActionParam = {path: "actionTypeList",
+        select: {"name": 1}};
+
+    Template.findById(id).populate(postActionParam).exec(function(err, doc) {
         if (err) throw err;
         successHandler.handle(doc, res);
-    });
+    })
 });
+
+
 
 module.exports = router;
