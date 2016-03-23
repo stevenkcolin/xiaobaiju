@@ -38,11 +38,17 @@ router.get('/login', function (req, res, next) {
 
 router.get('/templateMgmt',function(req,res) {
     res.render('templateMgmt');
-})
+});
 
 router.get('/actiontypeMgmt',function(req,res){
     res.render('actiontypeMgmt');
-})
+});
+
+router.get('/postActionsMgmt',function(req,res){
+    res.render('postActionsMgmt');
+});
+
+
 
 module.exports = router;
 
