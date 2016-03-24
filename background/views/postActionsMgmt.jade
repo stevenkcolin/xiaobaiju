@@ -9,6 +9,16 @@ html
         script(type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js')
         script(type='text/javascript' src='/javascripts/jquery.easyui.min.js')
         script.
+            var actionTypeList = [
+                {actionTypeId: '56ce567830f5dc513c96b71a', name: '跑步'},
+                {actionTypeId: '56ce566230f5dc513c96b719', name: '早起'},
+                {actionTypeId: '56f23a3e2cf8ebfb263e19da', name: 'test003'}
+                /*{productid: 'RP-LI-02', name: 'Iguana'},
+                {productid: 'FL-DSH-01', name: 'Manx'},
+                {productid: 'FL-DLH-02', name: 'Persian'},
+                {productid: 'AV-CB-01', name: 'Amazon Parrot'}*/
+            ];
+
             $(document).ready(function () {
                 $('#dg').datagrid(
                         {
@@ -18,7 +28,7 @@ html
                                     rows:data.result
                                 };
                             },
-                            url: "/api/template/",
+                            url: "/api/postactions/",
                             method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
@@ -31,27 +41,118 @@ html
                             columns: [[
                                 {field: 'rowId', title: 'rowId', checkbox: true},
                                 {field: '_id', title: 'id'},
-                                {field: 'name', title: 'TemplateName', sortable: true},
-                                {field: 'status',title:'状态',editor:'text',sortable: true},
-                                {field: 'background',title:'背景',editor:'text'},
-                                {field: 'actionTypeList', title:'actionTypeList'}
-                            ]]
+                                {field: 'actionTypeId', title: 'actionTypeId', sortable: true,
+                                    editor: 'text',
+                                    formatter: function (value, row) {
+                                        return row.productname || value;
+                                    },
+                                    editor: {
+                                        type: 'combobox',
+                                        options: {
+                                            valueField: 'actionTypeId',
+                                            textField: 'name',
+                                            data: actionTypeList,
+                                            required: true
+                                        }
+                                    }
+                                },
+                                {field: 'isShared',title:'是否分享',editor:'text',sortable: true,
+                                    editor: {
+                                        type: 'checkbox',
+                                        options: {
+                                            on: 'true',
+                                            off: 'false'
+                                        }
+                                    }
+                                },
+                                {field: 'title',title:'标题',editor:'text',width:70,},
+                                {
+                                    field: 'action', title: 'Action', width: 40, align: 'center',
+                                    formatter: function (value, row, index) {
+                                        if (row.editing) {
+                                            var s = '<a href="javascript:void(0)" onclick="saverow(this)">Save</a> ';
+                                            var c = '<a href="javascript:void(0)" onclick="cancelrow(this)">Cancel</a>';
+                                            return s + c;
+                                        } else {
+                                            var e = '<a href="javascript:void(0)" onclick="editrow(this)">Edit</a> ';
+                                            var d = '<a href="javascript:void(0)" onclick="deleterow(this)">Delete</a>';
+                                            return e + d;
+                                        }
+                                    }
+                                }
+                            ]],
+                            onEndEdit: function (index, row) {
+                                var ed = $(this).datagrid('getEditor', {
+                                    index: index,
+                                    field: 'actionTypeId'
+                                });
+                                row.actionTypeId = $(ed.target).combobox('getValue');
+
+                                var row_id = row._id;
+                                var row_actionTypeId = row.actionTypeId;
+                                var row_isShared = row.isShared;
+                                var row_title = row.title;
+                                save(row_id,row_actionTypeId,row_isShared,row_title);
+                            },
+                            onBeforeEdit: function (index, row) {
+                                row.editing = true;
+                                $(this).datagrid('refreshRow', index);
+                            },
+                            onAfterEdit: function (index, row) {
+                                row.editing = false;
+                                $(this).datagrid('refreshRow', index);
+                            },
+                            onCancelEdit: function (index, row) {
+                                row.editing = false;
+                                $(this).datagrid('refreshRow', index);
+                            }
                         });
             });
 
+            function getRowIndex(target) {
+                var tr = $(target).closest('tr.datagrid-row');
+                return parseInt(tr.attr('datagrid-row-index'));
+            }
+            function editrow(target) {
+                $('#dg').datagrid('beginEdit', getRowIndex(target));
+            }
+            function deleterow(target) {
+                $.messager.confirm('Confirm', 'Are you sure?', function (r) {
+                    if (r) {
+                        var rows = $('#dg').datagrid('getRows');    // get current page rows
+                        var row = rows[getRowIndex(target)];
 
+                        //alert(row._id);
+                        deleteUser(row._id);
 
-            function searchUser() {
-                var name = $("#name_search").val();
-                var loginFrom = $("#loginFrom_search").val();
-                // $('#dg').datagrid({
-                //  url: '/users/queryUserByCondition'
-                //});
-                $('#dg').datagrid('load', {
-                    name: name,
-                    loginFrom: loginFrom
+                        /*$('#dg').datagrid('deleteRow', getRowIndex(target));*/
+                    }
                 });
+            }
+            function saverow(target) {
+                $('#dg').datagrid('endEdit', getRowIndex(target));
+            }
+            function cancelrow(target) {
+                $('#dg').datagrid('cancelEdit', getRowIndex(target));
+            }
 
+            function insert() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    var index = $('#dg').datagrid('getRowIndex', row);
+                } else {
+                    index = 0;
+                }
+                $('#dg').datagrid('insertRow', {
+                    index: index,
+                    row: {
+                        isShared:'True',
+                        title: 'test001',
+                        actionTypeId : ''
+                    }
+                });
+                $('#dg').datagrid('selectRow', index);
+                $('#dg').datagrid('beginEdit', index);
             }
 
             function newTemplate() {
@@ -98,8 +199,8 @@ html
                 });
             }
 
-            function deleteUser() {
-                var row = $('#dg').datagrid('getChecked');
+            function deleteUser(row_id) {
+                /*var row = $('#dg').datagrid('getChecked');
                 if (row.length === 0) {
                     $.messager.alert('提示信息', '请选择一条数据........');
                     return;
@@ -111,17 +212,17 @@ html
                 var userIds = new Array();
                 for (var i = 0; i < row.length; i++) {
                     userIds.push(row[i]._id);
-                }
+                }*/
                 $.messager
                         .confirm(
-                                '确认',
-                                '确定删除用户吗？',
+                                '再次确认',
+                                '再次确定删除吗？',
                                 function (r) {
                                     if (r) {
                                         $.ajax({
                                             cache: true,
                                             type: 'delete',
-                                            url: '/api/template/'+userIds,
+                                            url: '/api/postactions/'+row_id,
                                             async: false,
                                             error: function (data) {
                                                 $.messager.alert('提示信息',
@@ -132,11 +233,11 @@ html
                                                     $('#dg')
                                                             .datagrid(
                                                                     'reload',
-                                                                    '/api/template/');
+                                                                    '/api/postactions/');
                                                 }
                                                 //$("#method").val("modify");
-                                                $.messager.alert('提示信息',
-                                                        res.msgInfo);
+                                                /*$.messager.alert('提示信息',
+                                                        res.msgInfo);*/
                                             }
                                         });
                                     }
@@ -148,43 +249,29 @@ html
                 $('#dlg').dialog('close');
             }
 
-            function save() {
-                var _id = $("#id_createOrEdit").val();
-                var name = $.trim($("#name_createOrEdit").val());
-                var background = $.trim($("#background_createOrEdit").val());
-                var status = $.trim($("#status_createOrEdit").val());
-                var strAction = $.trim($("#ActionTypeList_creatOrEdit").val());
+            function save(row_id, row_actionTypeId, row_isShared, row_title) {
+                /*alert (row_id);
+                alert (row_actionTypeId);
+                alert (row_isShared);
+                alert(row_title);*/
 
-
-                /*var actionTypeIds = "56ea65116170abc9107b8dea,56ea65c16170abc9107b8dec";
-                var tmp = actionTypeIds.split(',');
-                var arrParams = {};
-                tmp.forEach(function (str, index) {
-                    arrParams[index] = str;
-                });*/
-
-                var test = {};
-                test[0] = "56ea65116170abc9107b8dea";
-                test[1] = "56ea65c16170abc9107b8dec";
-
-                var urlPost = "";
-                if ($("#method").val() === "create") {
-                    urlPost = "/api/template/create";
+                if (row_id === undefined) {
+                    urlPost = "/api/postactions/create";
                 }
-                if ($("#method").val() === "update") urlPost = "/api/template/update/"+_id;
+                else {
+                    urlPost = "/api/postactions/update/"+row_id;
+                }
+
                 $.ajax({
                     type: 'POST',
                     url: urlPost,
                     dataType: "json",
                     data: {
-                        name: name,
-                        background: background,
-                        status: status,
-                        actionTypeList : test
+                        actionTypeId: row_actionTypeId,
+                        isShared: row_isShared,
+                        title: row_title
                     },
-
                     success: function (data) {
-
                         if (data.status == "success") {
                             $('#dg').datagrid('reload');
                             $('#dlg').dialog('close');
@@ -198,62 +285,66 @@ html
                 });
             }
     body
-        table(id="dg" title="Template管理"  width="100%"
-        style="height: 50%;" data-options="fit:true" )
-        div(id="toolbar")
-            //table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
-            //    tr
-            //        //td(align="left" width="200px") Name
-            //        //    input(class="easyui-textbox" type="text"
-            //        //    name="name_search" id="name_search")
-            //        //td(align="left" width="200px") LoginFrom
-            //        //    input(class="easyui-textbox" type="text"
-            //        //    name="loginFrom_search" id="loginFrom_search")
-            //    tr
-            //        //td
-            //        //    a(id="searchBtn" href="javascript:void(0)"
-            //        //    class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
-            //        //    onclick="searchUser()") 查询
-            a(id="save" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
-            iconcls="icon-add" plain="true" onclick="newTemplate()") 新增
-            a(id="delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
-            iconcls="icon-remove" plain="true" onclick="deleteUser()") 删除
-            a(id="update" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
-            iconcls="icon-edit" plain="true" onclick="editTemplate()") 修改
-
-        form(id="createOrEdit" method="post")
-            div(id="dlg" class="easyui-dialog"
-            data-options="closable:false,modal:true"
-            style="width: 600px; height: 300px; padding: 10px 20px; position: relative;"
-            closed="true" buttons="#dlg-buttons")
-                div(class="ftitle") Template信息
-                input(id="id_createOrEdit" type="hidden" )
-                div(class="fitem")
-                    label TemplateName:
-                    input(id="name_createOrEdit" type="text" class="easyui-textbox" size="40")
-                    span(style="color: red;") *
-                div(class="fitem")
-                    label Background:
-                    input(id="background_createOrEdit" type="text" class="easyui-textbox" size="70")
-                    span(style="color: red;") *
-                div(class="fitem")
-                    label Status:
-                    input(id="status_createOrEdit" type="text" class="easyui-textbox" size="70")
-                    span(style="color: red;") *
-                div(class="fitem")
-                    label Action Type List:
-                    input(id="ActionTypeList_creatOrEdit" type="text" class="easyui-textbox" size="70")
-                    span(style="color: red;") *
+        a( href="javascript:void(0)" class="easyui-linkbutton" onclick="insert()") Insert Row
+        table(id="dg" )
 
 
-        div(id="dlg-buttons")
-            a(href="javascript:void(0)" class="easyui-linkbutton c6"
-            iconcls="icon-ok" onclick="save();" style="width: 90px") 保存
-            a(href="javascript:void(0)" class="easyui-linkbutton"
-            iconcls="icon-cancel" onclick="closeDlg();" style="width: 90px") 关闭
-        input(type="hidden" id="method" name="method" value="update")
-
-        table(id="dg2" title="test001" width ="100%" style="height: 50%;" data-options="fit:true")
+        //table(id="dg" title="Template管理"  width="100%"
+        //style="height: 50%;" data-options="fit:true" )
+        //div(id="toolbar")
+        //    //table(id='ddg' class='easyui-panel' width='100%' style='height: 100px')
+        //    //    tr
+        //    //        //td(align="left" width="200px") Name
+        //    //        //    input(class="easyui-textbox" type="text"
+        //    //        //    name="name_search" id="name_search")
+        //    //        //td(align="left" width="200px") LoginFrom
+        //    //        //    input(class="easyui-textbox" type="text"
+        //    //        //    name="loginFrom_search" id="loginFrom_search")
+        //    //    tr
+        //    //        //td
+        //    //        //    a(id="searchBtn" href="javascript:void(0)"
+        //    //        //    class="easyui-linkbutton" iconcls="icon-search" style="width: 80px"
+        //    //        //    onclick="searchUser()") 查询
+        //    a(id="save" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
+        //    iconcls="icon-add" plain="true" onclick="newTemplate()") 新增
+        //    a(id="delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
+        //    iconcls="icon-remove" plain="true" onclick="deleteUser()") 删除
+        //    a(id="update" href="javascript:void(0)" class="easyui-linkbutton" data-options="disabled:false"
+        //    iconcls="icon-edit" plain="true" onclick="editTemplate()") 修改
+        //
+        //form(id="createOrEdit" method="post")
+        //    div(id="dlg" class="easyui-dialog"
+        //    data-options="closable:false,modal:true"
+        //    style="width: 600px; height: 300px; padding: 10px 20px; position: relative;"
+        //    closed="true" buttons="#dlg-buttons")
+        //        div(class="ftitle") Template信息
+        //        input(id="id_createOrEdit" type="hidden" )
+        //        div(class="fitem")
+        //            label TemplateName:
+        //            input(id="name_createOrEdit" type="text" class="easyui-textbox" size="40")
+        //            span(style="color: red;") *
+        //        div(class="fitem")
+        //            label Background:
+        //            input(id="background_createOrEdit" type="text" class="easyui-textbox" size="70")
+        //            span(style="color: red;") *
+        //        div(class="fitem")
+        //            label Status:
+        //            input(id="status_createOrEdit" type="text" class="easyui-textbox" size="70")
+        //            span(style="color: red;") *
+        //        div(class="fitem")
+        //            label Action Type List:
+        //            input(id="ActionTypeList_creatOrEdit" type="text" class="easyui-textbox" size="70")
+        //            span(style="color: red;") *
+        //
+        //
+        //div(id="dlg-buttons")
+        //    a(href="javascript:void(0)" class="easyui-linkbutton c6"
+        //    iconcls="icon-ok" onclick="save();" style="width: 90px") 保存
+        //    a(href="javascript:void(0)" class="easyui-linkbutton"
+        //    iconcls="icon-cancel" onclick="closeDlg();" style="width: 90px") 关闭
+        //input(type="hidden" id="method" name="method" value="update")
+        //
+        //table(id="dg2" title="test001" width ="100%" style="height: 50%;" data-options="fit:true")
 
 
 
