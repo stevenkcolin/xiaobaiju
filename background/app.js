@@ -47,14 +47,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("express-domain-middleware"));
 
 //db connection by using orm
-//app.use(orm.express(sqldbConfig, {
-//    define: function(db, models, next) {
-//        var listModels = require("./js/models/sqlModel");
-//        listModels(db, models);
-//        console.log('Mysql connected to ' + sqldbConfig.protocol + "://" + sqldbConfig.host + "/" + sqldbConfig.database);
-//        next();
-//    }
-//}));
+app.use(orm.express(sqldbConfig, {
+    define: function(db, models, next) {
+        var listModels = require("./js/models/sqlModel");
+        listModels(db, models);
+        console.log('Mysql connected to ' + sqldbConfig.protocol + "://" + sqldbConfig.host + "/" + sqldbConfig.database);
+        next();
+    }
+}));
 
 // Backend admin page
 app.use("/admin", adminIndex);
