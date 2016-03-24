@@ -8,17 +8,20 @@ html
         link(rel="stylesheet" type="text/css" href="/stylesheets/themes/icon.css")
         script(type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js')
         script(type='text/javascript' src='/javascripts/jquery.easyui.min.js')
+        script(type='text/javascript' src='/javascripts/common.js')
         script.
+            var templateId;
             $(document).ready(function () {
+                templateId = getUrlParam('templateId');
                 $('#dg').datagrid(
                         {
                             loadFilter: function (data) {
                                 return {
                                     total:data.result.length,
-                                    rows:data.result
+                                    rows:data.result.actionTypeList
                                 };
                             },
-                            url: "/api/actiontype/",
+                            url: "/api/template/withActionType?id=" + templateId,
                             method: 'get',
                             toolbar: "#toolbar",
                             pagination: true,
@@ -153,7 +156,8 @@ html
                     urlPost = "/api/actiontype/create";
                     jsondata = {
                         name : name,
-                        postLimit : postLimit
+                        postLimit : postLimit,
+                        templateId : templateId
                     };
                 };
 

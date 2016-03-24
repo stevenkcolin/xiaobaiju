@@ -30,7 +30,10 @@ html
                             height: 500,
                             columns: [[
                                 {field: 'rowId', title: 'rowId', checkbox: true},
-                                {field: '_id', title: 'id'},
+                                {field: '_id', title: 'id',
+                                    formatter: function(value, rowData, rowIndex) {
+                                        return '<a href="actionTypeMgmt?templateId=' + rowData._id + '">' + rowData._id + '</a>';
+                                }},
                                 {field: 'name', title: 'TemplateName', sortable: true},
                                 {field: 'status',title:'状态',editor:'text',sortable: true},
                                 {field: 'background',title:'背景',editor:'text'},

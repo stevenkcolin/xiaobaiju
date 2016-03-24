@@ -36,6 +36,15 @@ router.get("/published", function(req, res, next) {
     });
 });
 
+// get template by id
+router.get("/withActionType", function(req, res, next) {
+    var id = req.query.id;
+    Template.findById(id).populate('actionTypeList').exec(function(err, template) {
+        if (err) throw err;
+        successHandler.handle(template, res);
+    });
+});
+
 // get a Template by id
 router.get("/:id", function(req, res) {
     var id = req.params.id;
@@ -121,7 +130,6 @@ router.get("/actionType", function(req, res, next) {
         successHandler.handle(doc, res);
     })
 });
-
 
 
 module.exports = router;

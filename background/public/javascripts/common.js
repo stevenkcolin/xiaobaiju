@@ -75,7 +75,7 @@ function chagestyle(theme){
 	//createCookie('style',theme,365);
 }
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	$.ajaxSetup ({
 		   cache: false //关闭AJAX相应的缓存
 		});
@@ -86,13 +86,13 @@ $(document).ready(function() {
 		c='default';
 	}
 	link.attr('href', doman+'/jquery-easyui-1.4/themes/gray/easyui.css');
-	/*$('.styleswitch').click(function()
+	/!*$('.styleswitch').click(function()
 		{
 			alert(this.getAttribute("rel"));
 				chagestyle(this.getAttribute("rel"));
 		});
-	*/
-});
+	*!/
+});*/
 
 function switchStylestyle(styleName)
 {
@@ -144,3 +144,11 @@ function eraseCookie(name)
 	createCookie(name,"",-1);
 }
 // /cookie functions
+
+//获取url中的参数
+function getUrlParam(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+	if (r != null) return decodeURIComponent(r[2]);
+	return null; //返回参数值
+}

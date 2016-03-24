@@ -10,6 +10,7 @@ var _ = require('underscore');
 var models = require("../../models/model");
 var successHandler = require("../../common/successHandler");
 var ActionType = models.ACTIONTYPE;
+var Template = models.TEMPLATE;
 
 var router = express.Router();
 
@@ -38,12 +39,15 @@ router.get("/:id", function(req, res) {
 
 // create a ActionType
 router.post("/create", function(req, res) {
-    var actiontype = new ActionType();
-    _.extend(actiontype, req.body);
-    //task.createDate = new Date();
-    actiontype.save(function(err){
+    var actionType = new ActionType();
+    _.extend(actionType, req.body);
+    var templateId = actionType.templateId;
+    actionType.save(function(err, doc){
         if (err) throw err;
-        successHandler.handle(null, res);
+        Template.findOneAndUpdate({_id: templateId}, {$push: {actionTypeList: doc.id}},function(err, template) {
+            if (err) throw err;
+            successHandler.handle(null, res);
+        });
     });
 });
 
