@@ -6,6 +6,8 @@ var dbURI = dbconfig.protocol + '://' + dbconfig.host + '/' + dbconfig.database;
 // Create the database connection
 mongoose.connect(dbURI, {user: dbconfig.username, pass: dbconfig.password});
 
+mongoose.set('debug', true);
+
 mongoose.connection.on('connected', function () {
     console.log('Mongoose connected to ' + dbURI);
 });

@@ -4,9 +4,9 @@
 var models = require("../models/model");
 var md5encrypt = require("../common/md5encrypt");
 var successHandler = require("../common/successHandler");
-var User = models.USER;
+var User = models.User;
 var _ = require('underscore');
-
+var Q = require('q');
 
 module.exports = {
     create: function(req, res, next) {
@@ -39,14 +39,15 @@ module.exports = {
         })
     },
 
-    searchById: function(req, res, next) {
-        var userId = req.query.userId;
+    searchById: function(userId) {
+        var deferred = Q.defer();
         var searchCondition = {"_id": userId};
 
-        User.find(searchCondition,function(err,doc){
-            if (err) throw err;
-            successHandler.handle(doc, res);
+        User.find(searchCondition, function(err,doc){
+            if (err) deferred.reject(err);
+            else deferred.resolve(doc);
         });
+        return deferred.promise;
     },
 
     searchByCondition: function(req, res, next) {

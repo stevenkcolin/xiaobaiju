@@ -32,29 +32,29 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(session({
-    secret: '12345',
-    name: 'testapp',   //�����nameֵ����cookie��name��Ĭ��cookie��name�ǣ�connect.sid
-    cookie: {maxAge: 1200000},  //����maxAge��80000ms����80s��session����Ӧ��cookieʧЧ����
-    resave: false,
-    saveUninitialized: true
-}));
+//app.use(session({
+//    secret: '12345',
+//    name: 'testapp',   //�����nameֵ����cookie��name��Ĭ��cookie��name�ǣ�connect.sid
+//    cookie: {maxAge: 1200000},  //����maxAge��80000ms����80s��session����Ӧ��cookieʧЧ����
+//    resave: false,
+//    saveUninitialized: true
+//}));
 
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+//app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "admin")));
 
 //use domain middleware
 app.use(require("express-domain-middleware"));
 
 //db connection by using orm
-app.use(orm.express(sqldbConfig, {
+/*app.use(orm.express(sqldbConfig, {
     define: function(db, models, next) {
         var listModels = require("./js/models/sqlModel");
         listModels(db, models);
         console.log('Mysql connected to ' + sqldbConfig.protocol + "://" + sqldbConfig.host + "/" + sqldbConfig.database);
         next();
     }
-}));
+}));*/
 
 // Backend admin page
 app.use("/admin", adminIndex);

@@ -38,9 +38,9 @@ _USER.index({loginFrom: 1, loginAccount: 1}, {unique: true});
 
 // Define Admin schema
 var _ADMIN = new Schema(_.extend({
-    loginAccount: {type: String, unique: true},
+    name: {type: String, unique: true},
     password : String,
-    name: String
+    realName: String
 }, adminBaseClass));
 
 
@@ -93,10 +93,10 @@ var _COMMENTS = new Schema(_.extend({
 }, userBaseClass));
 
 // export them
-exports.USER = mongoose.model("USER", _USER, "USER");
-exports.TASK = mongoose.model("TASK", _TASK, "TASK");
-exports.ADMIN = mongoose.model("ADMIN", _ADMIN, "ADMIN");
-exports.TEMPLATE = mongoose.model("TEMPLATE", _TEMPLATE, "TEMPLATE");
-exports.ACTIONTYPE = mongoose.model("ACTIONTYPE",_ACTIONTYPE,"ACTIONTYPE");
-exports.POSTACTIONS = mongoose.model("POSTACTIONS", _POSTACTIONS,"POSTACTIONS");
-exports.COMMENTS = mongoose.model("COMMENTS", _COMMENTS, "COMMENTS");
+exports.User = mongoose.model("USER", _USER);
+exports.Task = mongoose.model("TASK", _TASK);
+exports.Admin = mongoose.model("ADMIN", _ADMIN);
+exports.Template = mongoose.model("TEMPLATE", _TEMPLATE);
+exports.ActionType = mongoose.model("ACTIONTYPE",_ACTIONTYPE);
+exports.PostActions = mongoose.model("POSTACTION", _POSTACTIONS);
+exports.Comments = mongoose.model("COMMENT", _COMMENTS);

@@ -1,110 +1,57 @@
 /**
  * Created by ncs1207 on 2016/2/1.
  */
-var models = require("../models/model");
-var md5encrypt = require("../common/md5encrypt");
-var successHandler = require("../common/successHandler");
-var Admin = models.ADMIN;
+
 var _ = require('underscore');
 
+var models = require("../models/model");
+var md5encrypt = require("../common/md5encrypt");
+var Admin = models.Admin;
+var baseDao = require("../dao/baseDao");
+
 module.exports = {
-    login: function(req, res, next) {
-        var userid = req.body.userid;
-        var userpwd = md5encrypt.encrypt(req.body.userpwd);
+    login: function(name, password) {
+        var encryptedPwd = md5encrypt.encrypt(password),
+            searchCond = {name: new RegExp('^'+name+'$', 'i'), password: encryptedPwd};
 
-        Admin.find({loginAccount: userid, password: userpwd}, function(err, doc) {
-            if (err) throw err;
-            if (doc.length > 0) {
-                req.session.user = doc;
-                successHandler.handle(doc, res);
-            } else if (doc.length === 0) {
-                res.json({"status": "fail"})
-            }
-
-        });
+        return baseDao.find(searchCond, '-password', null, Admin);
     },
 
-    updatePwd: function(req, res, next) {
-        var adminId = req.session.user[0]._id;
-        var newPwd = md5encrypt.encrypt(req.body.newPwd);
-        var param = {"password": newPwd};
-        Admin.update({"_id" : adminId}, {$set:param},function(err, doc) {
-            if (err) throw err;
-            successHandler.handle(doc, res);
-        })
+    updatePwd: function(adminId, newPwd, operatorId) {
+        var newPwd = md5encrypt.encrypt(newPwd),
+            param = {"password": newPwd};
+
+        return baseDao.updateById(adminId, param, null, Admin, operatorId);
     },
 
-    create: function(req, res, next) {
-        var admin = new Admin();
-        if (req.body.password) req.body.password = md5encrypt.encrypt(req.body.password);
-        _.extend(admin, req.body);
-        admin.createDate = new Date();
-        admin.save(function(err, doc){
-            if (err) throw err;
-            successHandler.handle(doc, res);
-        });
+    create: function(admin, operatorId) {
+        admin.password = md5encrypt.encrypt(admin.password);
+        var admonPo = new Admin();
+        _.extend(admonPo, admin);
+        return baseDao.save(admonPo, operatorId);
     },
 
-    delete: function(req, res, next) {
-        var adminIdsArray = req.body.adminIds.split(",");
-
-        Admin.remove({"_id" : {"$in" : adminIdsArray } },function(err, doc) {
-            if (err) throw err;
-            successHandler.handle(doc, res);
-        })
+    delete: function(adminId) {
+        return baseDao.removeById(adminId, null, Admin);
     },
 
-    update: function(req, res, next) {
-        var adminId = req.body.adminId;
-        var param = req.body;
-        var password = md5encrypt.encrypt(req.body.password);
-        param.password = password;
-        Admin.update({"_id" : adminId}, {$set:param},function(err, doc) {
-            if (err) throw err;
-            successHandler.handle(doc, res);
-        })
+    update: function(adminId, newAdmin, operatorId) {
+        newAdmin.password = md5encrypt.encrypt(newAdmin.password);
+        return baseDao.updateById(adminId, newAdmin, null, Admin, operatorId);
     },
 
-    searchById: function (req, res, next) {
-        var adminId = req.query.adminId;
-        var searchCondition = {"_id": adminId};
-
-        Admin.find(searchCondition,function(err,doc){
-            if (err) throw err;
-            successHandler.handle(doc, res);
-        });
+    searchById: function (adminId) {
+        return baseDao.findById(adminId, '-password', null, Admin);
     },
-    searchByCondition: function (req, res, next) {
-        //if (req.query.name === undefined) {
-        //    successHandler.handle(null, res);
-        //    return;
-        //}
 
-        var name = req.query.name;
-        var loginAccount = req.query.loginAccount;
-        var searchCondition = {"name": new RegExp(name, 'i'), "loginAccount": loginAccount};
-        if (name === '') {
-            delete searchCondition.name;
+    searchByCondition: function (condition) {
+        var searchCond = {}, start = condition.start, rows = condition.rows;
+        if (condition.name) {
+            searchCond.name = new RegExp(condition.name, 'i');
         }
-        if (loginAccount === '') {
-            delete searchCondition.loginAccount;
+        if (condition.realName) {
+            searchCond.realName = new RegExp(condition.realName, 'i');
         }
-
-        var page = req.query.page;
-        var rows = req.query.rows;
-        var startLine = (page - 1) * rows;
-        var dbSearch = Admin.find(searchCondition).limit(+rows).skip(startLine);
-
-        dbSearch.exec(function (err, rs) {
-            if (err) {
-                throw err;
-            } else {
-                //计算数据总数
-                Admin.find(searchCondition, function (err, result) {
-                    res.json({rows: rs, total: result.length});
-                });
-
-            }
-        });
+        return baseDao.findWithPage(searchCond, '-password', null, start, rows, Admin);
     }
 }

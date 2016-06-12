@@ -5,6 +5,7 @@
 
 var express = require("express");
 var _ = require('underscore');
+var assert = require('assert');
 
 var models = require("../../models/model");
 var md5encrypt = require("../../common/md5encrypt");
@@ -45,9 +46,15 @@ router.post("/update", function(req, res, next) {
     userService.update(req, res, next);
 });
 
+var test = function(result){
+    console.log(result);
+};
+
 // find user by id
 router.get("/searchById", function(req, res, next) {
-    userService.searchById(req, res, next);
+    var id = req.query.id;
+    assert.notEqual(id, null);
+    userService.searchById(id).then(function(doc){successHandler.handle(doc, res)}, function(err) {throw err});
 });
 
 // find user by search condition

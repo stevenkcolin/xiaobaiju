@@ -17,11 +17,11 @@ router.use(function (req, res, next) {
 
 /* GET home page. */
 router.get('/index', function (req, res, next) {
-    res.render('index', {username: req.session.user[0].name});
+    res.render('index');
 });
 
 router.get('/login', function (req, res) {
-    res.render('login');
+    res.render('login1');
 });
 
 router.get('/adminMgmt', function (req, res) {
@@ -33,7 +33,7 @@ router.get('/userMgmt', function (req, res) {
 });
 
 router.get('/login', function (req, res, next) {
-    res.render('login');
+    res.render('login1');
 });
 
 router.get('/templateMgmt',function(req,res) {
