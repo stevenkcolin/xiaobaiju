@@ -1,29 +1,26 @@
 /**
 * Created by hepf3 on 6/5/2016.
 */
-<template xmlns:v-on="http://www.w3.org/1999/xhtml">
+<template xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <div>
         <div id="mws-sidebar-stitch"></div>
         <div id="mws-sidebar-bg"></div>
         <div id="mws-sidebar">
             <div id="mws-searchbox" class="mws-inset">
-                <form action="http://www.malijuwebshop.com/themes/mws-admin/calendar.html">
+                <form>
                     <input type="text" class="mws-search-input" />
                     <input type="submit" class="mws-search-submit" />
                 </form>
             </div>
             <div id="mws-navigation">
                 <ul>
-                    <li><a href="dashboard.html" class="mws-i-24 i-home">Dashboard</a></li>
-                    <li><a href="charts.html" class="mws-i-24 i-chart">Charts</a></li>
-                    <li class="active"><a href="calendar.html" class="mws-i-24 i-day-calendar">Calendar</a></li>
-                    <li><a href="files.html" class="mws-i-24 i-file-cabinet">File Manager</a></li>
-                    <li><a href="table.html" class="mws-i-24 i-table-1">Table</a></li>
+                    <li><a v-bind:href="adminUrl" class="mws-i-24 i-user-2">系统管理员</a></li>
+                    <li><a href="charts.html" class="mws-i-24 i-users-2">用户管理</a></li>
                     <li>
-                        <a href="#" class="mws-i-24 i-list">Forms</a>
+                        <a href="#" class="mws-i-24 i-flag">目标管理</a>
                         <ul>
-                            <li><a href="form_layouts.html">Layouts</a></li>
-                            <li><a href="form_elements.html">Elements</a></li>
+                            <li><a href="form_layouts.html">类型</a></li>
+                            <li><a href="form_elements.html">目标</a></li>
                         </ul>
                     </li>
                     <li><a href="widgets.html" class="mws-i-24 i-cog">Widgets</a></li>
@@ -44,5 +41,13 @@
 
 
 <script>
-    export default {}
+    export default {
+        components: {},
+
+        data: function () {
+            return {
+                adminUrl: '/#!/main/admin'
+            }
+        }
+    }
 </script>

@@ -24,8 +24,8 @@ router.post("/login", function(req, res, next) {
     var name = req.body.name,
         password= req.body.password;
 
-    assert.notEqual(name, null);
-    assert.notEqual(password, null);
+    assert.notEqual(name, null, 'name is null');
+    assert.notEqual(password, null, 'password is null');
 
     adminService.login(name, password).then(
         function(doc) {
@@ -42,7 +42,7 @@ router.post("/updatePwd", function(req, res, next) {
     var adminId = req.body._id;
     var newPwd = req.body.password;
     var operatorId = req.body.operatorId;
-    assert.notEqual(newPwd, null);
+    assert.notEqual(newPwd, null, 'password is null');
 
     adminService.updatePwd(adminId, newPwd, operatorId).then(
         function(doc) {
@@ -71,8 +71,22 @@ router.post("/create", function(req, res, next) {
 // delete admin
 router.delete("/delete", function(req, res, next) {
     var adminId = req.body.id;
-    assert.notEqual(adminId, null);
+    assert.notEqual(adminId, null, 'id is null');
     adminService.delete(adminId).then(
+        function(doc) {
+            successHandler.handle(doc, res);
+        },
+        function(err) {
+            errorHandler.handle(err, req, res);
+        }
+    );
+});
+
+// mass delete admin
+router.delete("/massDelete", function(req, res, next) {
+    var adminIds = req.body.ids;
+    assert.notEqual(adminIds, null, 'ids is null');
+    adminService.massDelete(adminIds).then(
         function(doc) {
             successHandler.handle(doc, res);
         },
@@ -87,8 +101,8 @@ router.post("/update", function(req, res, next) {
     var adminId = req.body.id,
         newAdmin = req.body.admin,
         operatorId = req.body.operatorId;
-    assert.notEqual(adminId, null);
-    assert.notEqual(newAdmin, null);
+    assert.notEqual(adminId, null, 'id is null');
+    assert.notEqual(newAdmin, null, 'admin is null');
 
     adminService.update(adminId, newAdmin, operatorId).then(
         function(doc) {
@@ -103,7 +117,7 @@ router.post("/update", function(req, res, next) {
 // find admin by id
 router.get("/searchById", function(req, res, next) {
     var adminId = req.query.id;
-    assert.notEqual(adminId, null);
+    assert.notEqual(adminId, null, 'id is null');
     adminService.searchById(adminId).then(
         function(doc) {
             successHandler.handle(doc, res);
@@ -117,7 +131,7 @@ router.get("/searchById", function(req, res, next) {
 // find admin by search condition
 router.get("/searchByCondition", function(req, res, next) {
     var condition = req.query;
-    assert.notEqual(_.size(condition));
+    assert.notEqual(_.size(condition), 'condition is null');
     adminService.searchByCondition(condition).then(
         function (doc) {
             successHandler.handle(doc, res);
@@ -125,6 +139,17 @@ router.get("/searchByCondition", function(req, res, next) {
     ).catch(function(err) {
             errorHandler.handle(err, req, res);
     });
+});
+
+// find all admin
+router.get("/findAll", function(req, res, next) {
+    adminService.searchByCondition({}).then(
+        function (doc) {
+            successHandler.handle(doc, res);
+        }
+    ).catch(function(err) {
+            errorHandler.handle(err, req, res);
+        });
 });
 
 module.exports = router;

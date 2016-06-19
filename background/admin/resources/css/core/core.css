@@ -7,7 +7,7 @@ body
 {
 	background:url(../../images/core/mws-body-bg.png);
 	color:#323232;
-	font:13px/1.5 'PTSansRegular', Arial, Helvetica, sans-serif;
+	font:13px/1.5 'PTSansRegular', Arial, Helvetica, sans-serif, 微软雅黑, 新宋体;
 }
 
 .mws-inset

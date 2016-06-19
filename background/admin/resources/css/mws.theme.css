@@ -3,20 +3,20 @@ div#mws-header
 	border-color:#c5d52b;
 }
 
-.mws-panel .mws-panel-header span, 
-div#mws-navigation ul li.active a, 
-div#mws-navigation ul li.active span, 
-div#mws-user-tools #mws-username, 
-div#mws-navigation ul li span.mws-nav-tooltip, 
-div#mws-user-tools #mws-user-info #mws-user-functions #mws-username, 
-.ui-dialog .ui-dialog-title, 
-.ui-state-default, 
-.ui-state-active, 
-.ui-state-hover, 
-.ui-state-focus, 
-.ui-state-default a, 
-.ui-state-active a, 
-.ui-state-hover a, 
+.mws-panel .mws-panel-header span,
+div#mws-navigation ul li.active a,
+div#mws-navigation ul li.active span,
+div#mws-user-tools #mws-username,
+div#mws-navigation ul li span.mws-nav-tooltip,
+div#mws-user-tools #mws-user-info #mws-user-functions #mws-username,
+.ui-dialog .ui-dialog-title,
+.ui-state-default,
+.ui-state-active,
+.ui-state-hover,
+.ui-state-focus,
+.ui-state-default a,
+.ui-state-active a,
+.ui-state-hover a,
 .ui-state-focus a
 {
 	color:#c5d52b;

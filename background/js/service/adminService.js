@@ -36,7 +36,7 @@ module.exports = {
     },
 
     update: function(adminId, newAdmin, operatorId) {
-        newAdmin.password = md5encrypt.encrypt(newAdmin.password);
+        if (newAdmin.password) newAdmin.password = md5encrypt.encrypt(newAdmin.password);
         return baseDao.updateById(adminId, newAdmin, null, Admin, operatorId);
     },
 
@@ -53,5 +53,9 @@ module.exports = {
             searchCond.realName = new RegExp(condition.realName, 'i');
         }
         return baseDao.findWithPage(searchCond, '-password', null, start, rows, Admin);
+    },
+
+    massDelete: function(adminIds) {
+        return baseDao.massDeleteById(adminIds, Admin);
     }
 }

@@ -2,7 +2,8 @@
  * Created by hepf3 on 5/29/2016.
  */
 
-var Q = require("q");
+var Q = require('q'),
+    _ = require('underscore')
 
 module.exports = {
     save: function(entity, userId) {
@@ -24,8 +25,10 @@ module.exports = {
         var curTime = new Date();
         update.lastModifiedDate = curTime;
         update.lastModifiedBy = userId;
-
+        if (!options) options = {};
+        _.extend(options, {new: true});
         var deferred = Q.defer();
+
         schema.findByIdAndUpdate(id, update, options, function (err, doc) {
             if (err) deferred.reject(err);
             deferred.resolve(doc);
@@ -64,6 +67,16 @@ module.exports = {
         var deferred = Q.defer();
         var dbsearch = schema.find(conditions, projection, options).skip(Number(start)).limit(Number(rows));
         dbsearch.exec(function(err, doc) {
+            if (err) deferred.reject(err);
+            deferred.resolve(doc);
+        });
+        return deferred.promise;
+    },
+
+    massDeleteById: function(ids, schema) {
+        var deferred = Q.defer(),
+            condition = {_id:{$in:ids}};
+        schema.remove(condition, function(err, doc) {
             if (err) deferred.reject(err);
             deferred.resolve(doc);
         });
