@@ -1,0 +1,52 @@
+{
+  "name": "xiaobaiju-admin",
+  "version": "1.0.0",
+  "description": "xiaobaiju-admin",
+  "scripts": {
+    "watch": "webpack-dev-server --inline --hot --progress --color",
+    "build": "webpack --progress --color --watch",
+    "production": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Pengfei He",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "babel-core": "^6.1.21",
+    "babel-loader": "^6.1.0",
+    "babel-plugin-transform-runtime": "^6.1.18",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-runtime": "^5.8.0",
+    "clean-webpack-plugin": "^0.1.9",
+    "html-webpack-plugin":"^0.0.1",
+    "extract-text-webpack-plugin":"^0.0.1",
+    "cross-env": "^1.0.5",
+    "css-loader": "^0.21.0",
+    "style-loader": "^0.8.0",
+    "stylus-loader": "^1.4.0",
+    "url-loader": "^0.5.0",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^8.0.0",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  },
+  "dependencies": {
+    "es6-promise": "^3.0.2",
+    "firebase": "^2.3.1",
+    "jquery": "~2.1.1",
+    "jquery-ui":"^1.10.5",
+    "easyui": "~1.4.2",
+    "q":"^1.0.0",
+    "vue": "^1.0.8",
+    "vue-router": "^0.7.5",
+    "vue-resource": "^0.7.2"
+  }
+}
