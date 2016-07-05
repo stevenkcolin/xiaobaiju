@@ -11,28 +11,23 @@ var Schema = mongoose.Schema;
 
 var baseClass = {
     createdDate : Date,
-    lastModifiedDate : Date
-};
-
-var userBaseClass = _.extend({
+    lastModifiedDate : Date,
     createdBy : {type: Schema.Types.ObjectId, ref: "USER"},
     lastModifiedBy : {type: Schema.Types.ObjectId, ref: "USER"}
-}, baseClass);
-
-var adminBaseClass = _.extend({
-    createdBy : {type: Schema.Types.ObjectId, ref: "ADMIN"},
-    lastModifiedBy : {type: Schema.Types.ObjectId, ref: "ADMIN"}
-}, baseClass);
+};
 
 // Define User schema
-var _USER = new Schema({
-    phone : {type: String, unique: true, sparse: true},
+var _USER = new Schema(_.extend({
     password : String,
-    loginFrom: String, //3rd party {qq, weibo, weixin}
+    loginFrom: String, //3rd party {qq, weibo, weixin, telephone}
     loginAccount: String, //3rd party account
     name: String,
-    createDate: Date
-});
+    nickName: String,
+    gender: String,  //F, M
+    header: String,
+    description: String,
+    isAdmin: {type: Boolean, default: false}
+}, baseClass));
 
 _USER.index({loginFrom: 1, loginAccount: 1}, {unique: true});
 
@@ -40,63 +35,83 @@ _USER.index({loginFrom: 1, loginAccount: 1}, {unique: true});
 var _ADMIN = new Schema(_.extend({
     name: {type: String, unique: true},
     password : String,
-    realName: String
-}, adminBaseClass));
+    realName: String,
+    userId: {type: Schema.Types.ObjectId, ref: "USER"}
+}, baseClass));
 
 
-// Define Task schema
+// Define Goal Category schema
+var _GOAL_CATEGORY = new Schema(_.extend({
+    title : String,
+    description : String,
+    goalIds: [{type: Schema.Types.ObjectId, ref: "GOAL"}],
+}, baseClass));
+
+// Define Goal schema
+var _GOAL = new Schema(_.extend({
+    title : String,
+    description : String,
+    sequence: Number,
+    isRecommend: {type: Boolean, default: false},
+    isPersonal: {type: Boolean, default: false},
+    icon: {type: Schema.Types.ObjectId, ref: "ATTACHMENT"},
+    pic: {type: Schema.Types.ObjectId, ref: "ATTACHMENT"},
+    defaultTaskIds: [{type: Schema.Types.ObjectId, ref: "TASK"}]
+}, baseClass));
+
 var _TASK = new Schema(_.extend({
     title : String,
     description : String,
-    dueDate: Date,
-    completed: Boolean,
-    user: {type: Schema.Types.ObjectId, ref: "USER"}
-}, userBaseClass));
+    isPersonal: Boolean,
+    icon: {type: Schema.Types.ObjectId, ref: "ATTACHMENT"},
+    pic: {type: Schema.Types.ObjectId, ref: "ATTACHMENT"},
+    contentType: Number,  //1.url, 2.pic/text,
+    content: String,
+    contentPics: String,
+    frequency: Number //1. once 2. daily 3. weely
+}, baseClass));
 
 // added by chenlin on 2016
 
-var _TEMPLATE = new Schema(_.extend({
-    name : String,
-    actionTypeList : [{type: Schema.Types.ObjectId, ref: "ACTIONTYPE"}],
-    status : Number, //0:draft, 1:published, 2:retired
-    type : String,
-    background : String
-}, adminBaseClass));
+var _USER_GOAL_TASK = new  Schema(_.extend({
+    userId: {type: Schema.Types.ObjectId, ref: "USER"},
+    goalId: {type: Schema.Types.ObjectId, ref: "GOAL"},
+    taskIds: [{type: Schema.Types.ObjectId, ref: "TASK"}]
+}, baseClass));
 
 
-var _ACTIONTYPE = new Schema(_.extend({
-    name : String,
-    postLimit : String
-}, adminBaseClass));
+var _TASK_ACTIVITY = new Schema(_.extend({
+    taskId: {type: Schema.Types.ObjectId, ref: "TASK"},
+    userId: {type: Schema.Types.ObjectId, ref: "USER"},
+    goalId: {type: Schema.Types.ObjectId, ref: "GOAL"},
+    content: String,
+    pics: [{type: Schema.Types.ObjectId, ref: "ATTACHMENT"}],
+    likes: [{
+        user_id:{type: Schema.Types.ObjectId, ref: "USER"},
+        createdDate: Date
+    }],
+    comments:[_.extend({
+            content: String
+        }, baseClass)],
 
+    shares: [_.extend({
+        to: Number
+    }, baseClass)]
+}, baseClass));
 
-var _LIKESCHEMA = new Schema ({
-    createdBy : {type: Schema.Types.ObjectId, ref: "USER"},
-    createdDate : Date
-});
-
-
-var _POSTACTIONS = new Schema(_.extend({
-    actionTypeId: {type: Schema.Types.ObjectId, ref: "ACTIONTYPE"},
-    isShared: Boolean,
-    title: String,
-    url: String,
-    like: [_LIKESCHEMA],
-    comments: [{type: Schema.Types.ObjectId, ref: "COMMENTS"}]
-}, userBaseClass));
-
-
-var _COMMENTS = new Schema(_.extend({
-    content : String,
-    parent: {type: Schema.Types.ObjectId,ref:"COMMENTS"},
-    replyTo: {type: Schema.Types.ObjectId, ref: "USER"}
-}, userBaseClass));
+var _ATTACHMENT = new Schema(_.extend({
+    contentType : String,
+    mimeType : String,
+    filename: String,
+    path: String
+}, baseClass));
 
 // export them
 exports.User = mongoose.model("USER", _USER);
-exports.Task = mongoose.model("TASK", _TASK);
 exports.Admin = mongoose.model("ADMIN", _ADMIN);
-exports.Template = mongoose.model("TEMPLATE", _TEMPLATE);
-exports.ActionType = mongoose.model("ACTIONTYPE",_ACTIONTYPE);
-exports.PostActions = mongoose.model("POSTACTION", _POSTACTIONS);
-exports.Comments = mongoose.model("COMMENT", _COMMENTS);
+exports.GoalCategory = mongoose.model("GOAL_CATEGORY", _GOAL_CATEGORY);
+exports.Goal = mongoose.model("GOAL", _GOAL);
+exports.Task = mongoose.model("TASK",_TASK);
+exports.UserGoalTask = mongoose.model("USER_GOAL_TASK", _USER_GOAL_TASK);
+exports.TaskActivity = mongoose.model("TASK_ACTIVITY", _TASK_ACTIVITY);
+exports.Attachment = mongoose.model("ATTACHMENT", _ATTACHMENT);

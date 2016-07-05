@@ -4,5 +4,6 @@
 module.exports = {
     SESSION_KEY : 'user',
     API_STATUS_SUCCESS : 'success',
-    SESSION_TIMEOUT : 1000*60*60*20
+    SESSION_TIMEOUT : 1000*60*60*20,
+    ROWS : 20
 };

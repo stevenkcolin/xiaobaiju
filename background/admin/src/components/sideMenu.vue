@@ -15,7 +15,7 @@
             <div id="mws-navigation">
                 <ul>
                     <li><a v-bind:href="adminUrl" class="mws-i-24 i-user-2">系统管理员</a></li>
-                    <li><a href="charts.html" class="mws-i-24 i-users-2">用户管理</a></li>
+                    <li><a v-bind:href="userUrl" class="mws-i-24 i-users-2">用户管理</a></li>
                     <li>
                         <a href="#" class="mws-i-24 i-flag">目标管理</a>
                         <ul>
@@ -46,7 +46,8 @@
 
         data: function () {
             return {
-                adminUrl: '/#!/main/admin'
+                adminUrl: '/#!/main/admin',
+                userUrl: '/#!/main/user'
             }
         }
     }

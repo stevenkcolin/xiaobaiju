@@ -7,21 +7,18 @@
             <div class="mws-panel-toolbar top clearfix">
                 <ul>
                     <li><a href="#" class="mws-ic-16 ic-add" v-on:click.prevent="clickAdd">添加</a></li>
-                    <li><a href="#" class="mws-ic-16 ic-cross" v-on:click.prevent="clickDelete">删除</a></li>
                     <li><a href="#" class="mws-ic-16 ic-arrow-refresh" v-on:click.prevent="init">刷新</a></li>
                 </ul>
             </div>
             <table class="mws-table">
                 <thead>
                 <tr>
-                    <th></th>
                     <th>姓名</th>
                     <th>账号</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="gradeX" v-for="admin in adminList">
-                    <td><input type="checkbox" v-model="admin.checked"/></td>
                     <td><a href="#" v-on:click.prevent="gotoDetail(admin._id)">{{admin.realName}}</a></td>
                     <td>{{admin.name}}</td>
                 </tr>
@@ -69,23 +66,6 @@
             },
             clickAdd: function(id) {
                 this.$router.go('/main/adminDetail');
-            },
-            clickDelete: function(id) {
-                var ids = [], self = this;
-                this.adminList.forEach(function(admin){
-                    if (admin.checked) {
-                        ids.push(admin._id);
-                    }
-                });
-                if (ids.length > 0) {
-                    adminService.massDelete(ids).then(
-                            function() {
-                                self.init();
-                            }
-                    );
-                } else {
-                    jAlert.jAlert("请选择管理员","提示");
-                }
             }
         }
     }

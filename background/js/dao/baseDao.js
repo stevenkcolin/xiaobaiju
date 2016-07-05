@@ -2,8 +2,7 @@
  * Created by hepf3 on 5/29/2016.
  */
 
-var Q = require('q'),
-    _ = require('underscore')
+var _ = require('underscore')
 
 module.exports = {
     save: function(entity, userId) {
@@ -13,12 +12,11 @@ module.exports = {
         entity.createdBy = userId;
         entity.lastModifiedBy = userId;
 
-        var deferred = Q.defer();
-        entity.save(function(err, doc) {
-            if (err) deferred.reject(err);
-            deferred.resolve(doc);
+        return new Promise(function(resolve){
+            entity.save(function(err, doc) {
+                resolve(doc);
+            });
         });
-        return deferred.promise;
     },
 
     updateById: function(id, update, options, schema, userId) {
@@ -27,60 +25,62 @@ module.exports = {
         update.lastModifiedBy = userId;
         if (!options) options = {};
         _.extend(options, {new: true});
-        var deferred = Q.defer();
 
-        schema.findByIdAndUpdate(id, update, options, function (err, doc) {
-            if (err) deferred.reject(err);
-            deferred.resolve(doc);
+        return new Promise(function(resolve){
+            schema.findByIdAndUpdate(id, update, options, function (err, doc) {
+                resolve(doc);
+            });
         });
-        return deferred.promise;
     },
 
     removeById: function(id, options, schema) {
-        var deferred = Q.defer();
-        schema.findByIdAndRemove(id, options, function(err, doc) {
-            if (err) deferred.reject(err);
-            deferred.resolve(doc);
+        return new Promise(function(resolve){
+            schema.findByIdAndRemove(id, options, function(err, doc) {
+                resolve(doc);
+            });
         });
-        return deferred.promise;
     },
 
     findById: function(id, projection, options, schema) {
-        var deferred = Q.defer();
-        schema.findById(id, projection, options, function(err, doc) {
-            if (err) deferred.reject(err);
-            deferred.resolve(doc);
+        return new Promise(function(resolve){
+            schema.findById(id, projection, options, function(err, doc) {
+                resolve(doc);
+            })
         });
-        return deferred.promise;
     },
 
     find: function(conditions, projection, options, schema) {
-        var deferred = Q.defer();
-        schema.find(conditions, projection, options, function(err, doc) {
-            if (err) deferred.reject(err);
-            deferred.resolve(doc);
+        return new Promise(function(resolve){
+            schema.find(conditions, projection, options, function(err, doc) {
+                resolve(doc);
+            });
         });
-        return deferred.promise;
     },
 
     findWithPage: function(conditions, projection, options, start, rows, schema) {
-        var deferred = Q.defer();
         var dbsearch = schema.find(conditions, projection, options).skip(Number(start)).limit(Number(rows));
-        dbsearch.exec(function(err, doc) {
-            if (err) deferred.reject(err);
-            deferred.resolve(doc);
+        return new Promise(function(resolve){
+            dbsearch.exec(function(err, doc) {
+                resolve(doc);
+            });
         });
-        return deferred.promise;
     },
 
     massDeleteById: function(ids, schema) {
-        var deferred = Q.defer(),
-            condition = {_id:{$in:ids}};
-        schema.remove(condition, function(err, doc) {
-            if (err) deferred.reject(err);
-            deferred.resolve(doc);
+        var condition = {_id:{$in:ids}};
+        return new Promise(function(resolve){
+            schema.remove(condition, function(err, doc) {
+                resolve(doc);
+            });
         });
-        return deferred.promise;
+    },
+
+    count: function(conditions, schema) {
+        return new Promise(function(resolve){
+            schema.count(conditions, function(err, doc) {
+                resolve(doc);
+            });
+        });
     }
 
 };

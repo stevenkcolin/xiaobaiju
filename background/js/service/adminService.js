@@ -2,12 +2,12 @@
  * Created by ncs1207 on 2016/2/1.
  */
 
-var _ = require('underscore');
-
-var models = require("../models/model");
-var md5encrypt = require("../common/md5encrypt");
-var Admin = models.Admin;
-var baseDao = require("../dao/baseDao");
+var _ = require('underscore'),
+    models = require('../models/model'),
+    md5encrypt = require('../common/md5encrypt'),
+    Admin = models.Admin,
+    baseDao = require('../dao/baseDao'),
+    userService = require('./userService');
 
 module.exports = {
     login: function(name, password) {
@@ -19,20 +19,30 @@ module.exports = {
 
     updatePwd: function(adminId, newPwd, operatorId) {
         var newPwd = md5encrypt.encrypt(newPwd),
-            param = {"password": newPwd};
+            param = {'password,': newPwd};
 
         return baseDao.updateById(adminId, param, null, Admin, operatorId);
     },
 
     create: function(admin, operatorId) {
-        admin.password = md5encrypt.encrypt(admin.password);
-        var admonPo = new Admin();
-        _.extend(admonPo, admin);
-        return baseDao.save(admonPo, operatorId);
+        var userId;
+        return userService.create({isAdmin:true}, operatorId).then(
+            function(user) {
+                admin.password = md5encrypt.encrypt(admin.password);
+                var adminPo = new Admin();
+                _.extend(adminPo, admin);
+                adminPo.userId = user._id;
+                return baseDao.save(adminPo, operatorId);
+            }
+        );
     },
 
-    delete: function(adminId) {
-        return baseDao.removeById(adminId, null, Admin);
+    delete: function(adminId, operatorId) {
+        return baseDao.removeById(adminId, null, Admin).then(
+            function(admin) {
+                userService.update(admin.userId, {isAdmin: false}, operatorId);
+            }
+        );
     },
 
     update: function(adminId, newAdmin, operatorId) {

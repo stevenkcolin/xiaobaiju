@@ -30,9 +30,6 @@ router.post("/login", function(req, res, next) {
     adminService.login(name, password).then(
         function(doc) {
             successHandler.handle(doc, res);
-        },
-        function(err){
-            errorHandler.handle(err, req, res);
         }
     );
 });
@@ -47,9 +44,6 @@ router.post("/updatePwd", function(req, res, next) {
     adminService.updatePwd(adminId, newPwd, operatorId).then(
         function(doc) {
             successHandler.handle(doc, res);
-        },
-        function(err) {
-            errorHandler.handle(err, req, res);
         }
     );
 });
@@ -61,9 +55,6 @@ router.post("/create", function(req, res, next) {
     adminService.create(admin, operatorId).then(
         function(doc) {
             successHandler.handle(doc, res);
-        },
-        function(err) {
-            errorHandler.handle(err, req, res);
         }
     );
 });
@@ -75,9 +66,6 @@ router.delete("/delete", function(req, res, next) {
     adminService.delete(adminId).then(
         function(doc) {
             successHandler.handle(doc, res);
-        },
-        function(err) {
-            errorHandler.handle(err, req, res);
         }
     );
 });
@@ -89,9 +77,6 @@ router.delete("/massDelete", function(req, res, next) {
     adminService.massDelete(adminIds).then(
         function(doc) {
             successHandler.handle(doc, res);
-        },
-        function(err) {
-            errorHandler.handle(err, req, res);
         }
     );
 });
@@ -107,9 +92,6 @@ router.post("/update", function(req, res, next) {
     adminService.update(adminId, newAdmin, operatorId).then(
         function(doc) {
             successHandler.handle(doc, res);
-        },
-        function(err) {
-            errorHandler.handle(err, req, res);
         }
     );
 });
@@ -121,9 +103,6 @@ router.get("/searchById", function(req, res, next) {
     adminService.searchById(adminId).then(
         function(doc) {
             successHandler.handle(doc, res);
-        },
-        function(err) {
-            errorHandler.handle(err, req, res);
         }
     );
 });
@@ -136,9 +115,7 @@ router.get("/searchByCondition", function(req, res, next) {
         function (doc) {
             successHandler.handle(doc, res);
         }
-    ).catch(function(err) {
-            errorHandler.handle(err, req, res);
-    });
+    );
 });
 
 // find all admin
@@ -147,9 +124,7 @@ router.get("/findAll", function(req, res, next) {
         function (doc) {
             successHandler.handle(doc, res);
         }
-    ).catch(function(err) {
-            errorHandler.handle(err, req, res);
-        });
+    );
 });
 
 module.exports = router;

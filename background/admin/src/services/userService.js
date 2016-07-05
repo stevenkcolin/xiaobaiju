@@ -1,91 +1,20 @@
 /**
- * Created by hepf3 on 6/5/2016.
+ * Created by hepf3 on 6/26/2016.
  */
-var constants = require('../constants');
+var constants = require('../constants'),
+    _ = require('underscore');
 
 module.exports = {
-    login: function (username, password) {
-        var data = {name: username, password: password};
-        return new Promise(function (resolve, reject) {
+
+    searchUser: function (start,user) {
+        if (!start) start = 0;
+        var rows = constants.ROWS;
+        return new Promise(function(resolve, reject){
             $.ajax({
-                url: '/api/admin/login',
-                data: data,
-                dataType: 'json',
-                type: 'POST',
-                success: function (response) {
-                    if (response.status = constants.API_STATUS_SUCCESS && response.result.length) {
-                        response.loginTime = new Date().getTime();
-                        localStorage.setItem(constants.SESSION_KEY, JSON.stringify(response.result[0]));
-                        resolve(response);
-                    } else {
-                        reject(response);
-                    }
-                },
-                error: function (error) {
-                    console.error(error);
-                    reject(error);
-                }
-            });
-        });
-    },
-
-    checkIsLogin: function () {
-        var loginUserJson = localStorage.getItem(constants.SESSION_KEY);
-        if (!loginUserJson) return false;
-        var loginUser = loginUser = JSON.parse(loginUserJson),
-            currentTime = new Date().getTime();
-        if (currentTime - loginUser.loginTime > constants.SESSION_TIMEOUT) {
-            return false;
-        }
-        this.freshLogin(loginUser);
-        return true;
-    },
-
-    freshLogin: function(loginUser) {
-        loginUser.loginTime = new Date().getTime();
-        localStorage.setItem(constants.SESSION_KEY, JSON.stringify(loginUser));
-    },
-
-    logout: function () {
-        localStorage.removeItem(constants.SESSION_KEY);
-    },
-
-    changePassword: function (userId, password) {
-        var admin = JSON.parse(localStorage.getItem(constants.SESSION_KEY)),
-            operatorId = admin.userId,
-            data = {id: userId, admin: {password: password}, operatorId: operatorId};
-        return new Promise(function (resolve, reject) {
-            $.ajax({
-                url: '/api/admin/update',
-                data: JSON.stringify(data),
-                dataType: 'json',
-                type: 'POST',
-                contentType: 'application/json',
-                success: function (response) {
-                    if (response.status = constants.API_STATUS_SUCCESS) {
-                        resolve(response);
-                    } else {
-                        reject(response);
-                    }
-                },
-                error: function (error) {
-                    console.error(error);
-                    reject(error);
-                }
-            });
-        });
-    },
-
-    getCurrentUser: function () {
-        return JSON.parse(localStorage.getItem(constants.SESSION_KEY));
-    },
-
-    getAdminList: function () {
-        return new Promise(function (resolve, reject) {
-            $.ajax({
-                url: '/api/admin/findAll',
+                url: '/api/user',
                 dataType: 'json',
                 type: 'GET',
+                data: _.extend(user, {start: start, rows: rows}),
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status = constants.API_STATUS_SUCCESS) {
@@ -99,6 +28,7 @@ module.exports = {
                 }
             });
         });
+        //return deferred.promise;
     },
 
     getAdminById: function (id) {
@@ -119,7 +49,7 @@ module.exports = {
                     reject(error);
                 }
             });
-        });
+        })
     },
 
 

@@ -1,26 +1,24 @@
 /**
  * Created by ncs1207 on 2016/2/1.
  */
-var models = require("../models/model");
-var md5encrypt = require("../common/md5encrypt");
-var successHandler = require("../common/successHandler");
-var User = models.User;
-var _ = require('underscore');
-var Q = require('q');
+var models = require('../models/model'),
+    md5encrypt = require('../common/md5encrypt'),
+    successHandler = require('../common/successHandler'),
+    User = models.User,
+    _ = require('underscore'),
+    Q = require('q'),
+    baseDao = require('../dao/baseDao');
 
 module.exports = {
-    create: function(req, res, next) {
-        var user = new User();
-        if (req.body.password) req.body.password = md5encrypt.encrypt(req.body.password);
-        _.extend(user, req.body);
-        user.createDate = new Date();
-        user.save(function(err, doc){
-            if (err) throw err;
-            successHandler.handle(doc, res);
-        });
+    create: function(user, operatorId) {
+        if (user.password) user.password = md5encrypt.encrypt(user.password);
+        var userPo = new User();
+        _.extend(userPo, user);
+        return baseDao.save(userPo, operatorId);
     },
 
-    delete: function(req, res, next) {
+    delete: function(userIds) {
+        return baseDao.massDeleteById(userIds, User)
         var userIdsArray = req.body.userIds.split(",");
 
         User.remove({"_id" : {"$in" : userIdsArray } },function(err, doc) {
@@ -29,57 +27,45 @@ module.exports = {
         })
     },
 
-    update: function(req, res, next) {
-        var userId = req.body.userId;
-        var param = req.body;
-        var password = md5encrypt.encrypt(req.body.password);
-        User.update({"_id" : userId}, {$set:param},function(err, doc) {
-            if (err) throw err;
-            successHandler.handle(doc, res);
-        })
+    getAll: function(start, rows) {
+        var result = {};
+        return baseDao.findWithPage({}, null, null, start, rows, User).
+            then(function(users){
+                result.users = users;
+                return null
+            }).
+            then(function() {
+                return baseDao.count({}, User);
+            }).
+            then(function(count) {
+                result.total = count;
+                return result;
+            });
+        //return result;
+    },
+
+    update: function(userId, user, operatorId) {
+        if (user.password) user.password = md5encrypt.encrypt(user.password);
+        return baseDao.updateById(userId, user, null, User, operatorId);
     },
 
     searchById: function(userId) {
-        var deferred = Q.defer();
-        var searchCondition = {"_id": userId};
-
-        User.find(searchCondition, function(err,doc){
-            if (err) deferred.reject(err);
-            else deferred.resolve(doc);
-        });
-        return deferred.promise;
+        return baseDao.findById(userId, null, null, User);
     },
 
-    searchByCondition: function(req, res, next) {
-        //if (req.query.name === undefined) {
-        //    successHandler.handle(null, res);
-        //    return;
-        //}
-        var name = req.query.name;
-        var loginFrom = req.query.loginFrom;
-        var searchCondition = {"name": new RegExp(name, 'i'),"loginFrom": loginFrom};
-        if (name === '') {
-            delete searchCondition.name;
-        }
-        if (loginFrom === '') {
-            delete searchCondition.loginFrom;
-        }
+    searchByCondition: function(condition, start, rows) {
+        if (condition.nickName) condition.nickName = new RegExp(condition.nickName, 'i');
 
-        var page=req.query.page;
-        var rows=req.query.rows;
-        var startLine = (page-1)*rows;
-        var dbSearch = User.find(searchCondition).limit(+rows).skip(startLine);
-
-        dbSearch.exec(function(err,rs){
-            if(err){
-                throw err;
-            }else{
-                //计算数据总数
-                User.find(searchCondition, function(err,result){
-                    res.json({rows:rs,total:result.length});
-                });
-
+        return Q.spread([
+                baseDao.findWithPage(condition, null, null, start, rows, User),
+                baseDao.count({}, User)],
+            function (users, count) {
+                return {users: users, total:count};
             }
-        });
+        );
+    },
+
+    searchOneByCondition: function(condition) {
+        return baseDao.find(condition, null, null, User)
     }
 }
